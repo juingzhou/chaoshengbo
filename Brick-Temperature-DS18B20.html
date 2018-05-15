@@ -1,0 +1,1687 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="search" href="https://arduino-info.wikispaces.com/space/opensearch" type="application/opensearchdescription+xml" title="Wikispaces Search (arduino-info Wiki)" />
+<link rel="alternate" type="application/x-wiki" title="Edit This Page" href="/page/edit/Brick-Temperature-DS18B20" />
+<link rel="alternate" title="arduino-info - All Changes" href="https://arduino-info.wikispaces.com/wiki/xmla?v=rss_2_0" type="application/rss+xml" />
+<link rel="alternate" title="arduino-info : Brick-Temperature-DS18B20 - Discussion" href="https://arduino-info.wikispaces.com/message/xml/Brick-Temperature-DS18B20?v=rss_2_0" type="application/rss+xml" />
+<link rel="alternate" title="arduino-info : Brick-Temperature-DS18B20 - Edits" href="https://arduino-info.wikispaces.com/page/xml/Brick-Temperature-DS18B20?v=rss_2_0" type="application/rss+xml" />
+<link rel="microsummary" href="/page/microsummary/Brick-Temperature-DS18B20/edits"/>
+<link rel="microsummary" href="/page/microsummary/Brick-Temperature-DS18B20/messages"/>
+<script type="text/javascript">
+  
+if (typeof ws === 'undefined') ws = {};
+ws.context = {
+  instance: {
+    id: '1',
+    url: 'wikispaces.com',
+    isMain: true,
+    supportsGoogleDocs: false,
+    isTesClassroom: false,
+  },
+  user: {
+    id: '',
+    username: '',
+    status: '',
+    locale: 'en_US',
+    imageUrlPrefix: 'https://ssl.wikicdn.com/i/user_none_',
+    isTeacher: false,
+    canAdministerWiki: false,
+  },
+  wiki: {
+    id: '6378028',
+    name: 'arduino-info',
+    text: 'arduino-info',
+    module: 'B',
+    isClassroom: false,
+    isTesClassroom: false
+    ,defaultSpaceId: 6378028
+    ,isWwwWiki: false
+  },
+  project: {
+    id: '6378028',
+    name: ''
+  },
+  space: {
+    id: '6378028',
+    name: 'arduino-info',
+    isDefaultSpace: true,
+    isDefaultTemplate: false
+  },
+
+  environment_name: 'prod',
+
+  path: {
+    object: 'page',
+    method: 'view',
+    page: 'Brick-Temperature-DS18B20',
+    id: ''
+  },
+
+  settings: {
+    main_domain: 'wikispaces.com',
+    session_url: 'https://session.wikispaces.com/1/',
+    asset_url_prefix: 'https://ssl.wikicdn.com',
+    beta_features: false,
+    isMobileSite: false,
+    isUploadCapable: true,
+    can_discuss: false,
+    has_gdocs: false,
+    isDialog: false,
+    pwin: ''
+  },
+  clockSkewMillis: 1524984986678 - ((window.performance && window.performance.timing.responseStart > 0) ? window.performance.timing.responseStart : (new Date()).getTime())
+}
+
+
+// legacy javascript API variables, use the above instead
+var wikispaces_isUserLoggedIn = !!ws.context.user.id;
+var wikispaces_isMain = ws.context.instance.isMain;
+var wikispaces_username = ws.context.user.username;
+var wikispaces_spaceName = ws.context.space.name;
+var wikispaces_projectName = ws.context.project.name;
+var wikispaces_wikiName = ws.context.wiki.name;
+var wikispaces_wikiText = ws.context.wiki.text;
+var wikispaces_isDefaultSpace = ws.context.space.isDefaultSpace;
+var wikispaces_method = ws.context.path.method;
+var wikispaces_object = ws.context.path.object;
+var wikispaces_page = ws.context.path.page;
+var wikispaces_id = ws.context.path.id;
+var wikispaces_domain = ws.context.instance.url;
+var wikispaces_isUserOrganizer = false;
+var wikispaces_main_domain = ws.context.settings.asset_url_prefix;
+var wikispaces_asset_url_prefix = ws.context.settings.asset_url_prefix;
+var wikispaces_beta_features = ws.context.settings.beta_features;
+var wikispaces_isMobileSite = ws.context.settings.isMobileSite;
+var wikispaces_isUploadCapable = ws.context.settings.isUploadCapable;
+var wikispaces_can_discuss = ws.context.settings.can_discuss;
+var wikispaces_has_gdocs = ws.context.settings.has_gdocs;
+
+</script><title>arduino-info - Brick-Temperature-DS18B20</title>
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="144x144" href="https://ssl.wikicdn.com/_/z6371z4x/i/logo-144.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="https://ssl.wikicdn.com/_/j5j77xz3/i/logo-114.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="https://ssl.wikicdn.com/_/vq8j5432/i/logo-72.png" />
+<link rel="apple-touch-icon" href="https://ssl.wikicdn.com/_/38515190/i/logo-57.png" />
+<link rel="shortcut icon" href="https://ssl.wikicdn.com/_/55v9k02z/i/logo-16.png" />
+<style type="text/css">
+/* Standard theme styles */
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+body {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+.ws-theme-header-inner,
+.ws-theme-body-inner,
+.ws-theme-footer-inner,
+.ws-theme-content-inner,
+.ws-theme-sidebar-inner {
+  position: relative;
+}
+.ws-theme-header-inner:after,
+.ws-theme-body-inner:after,
+.ws-theme-footer-inner:after,
+.ws-theme-content-inner:after,
+.ws-theme-sidebar-inner:after,
+.ws-theme-menu-inner:after {
+  content: " ";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+.ws-theme-content, .ws-theme-sidebar {
+  overflow-x: auto;
+}
+.ws-theme-footer {
+  text-align: right;
+}
+.ws-theme-footer a, .ws-theme-footer a:hover {
+  text-decoration: none;
+}
+@media (min-width: 768px) {
+  .ws-theme-container {
+    width: 750px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .ws-theme-content {
+    width: 550px;
+    min-height: 384px;
+    float: right;
+  }
+  .ws-theme-sidebar {
+    width: 200px;
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  .ws-theme-container {
+    width: 970px;
+  }
+  .ws-theme-content {
+    width: 770px;
+    min-height: 496px;
+  }
+}
+@media (min-width: 1200px) {
+  .ws-theme-container {
+    width: 1170px;
+  }
+  .ws-theme-content {
+    width: 970px;
+    min-height: 600px;
+  }
+}
+/* End standard theme styles */
+</style>
+<style type="text/css">
+/* Theme-specific styles */
+body {
+  background: #DDA;
+}
+
+.ws-theme-container {
+  margin: 0 5px;
+}
+
+.ws-theme-header .WikiSearch .WikiSearchInput,
+.ws-theme-sidebar .WikiSearch .WikiSearchInput,
+.ws-theme-footer .WikiSearch .WikiSearchInput {
+  width: 100%;
+}
+
+.ws-theme-header a,
+.ws-theme-header a:hover,
+.ws-theme-sidebar a,
+.ws-theme-footer a {
+  text-decoration: none;
+}
+.ws-theme-header a,
+.ws-theme-header a:hover,
+.ws-theme-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+.ws-theme-header .ws-theme-menu a:hover,
+.ws-theme-sidebar a:hover,
+.ws-theme-footer a:hover {
+  text-decoration: underline;
+}
+.ws-theme-header img,
+.ws-theme-sidebar img,
+.ws-theme-footer img {
+  border: none;
+}
+
+.ws-theme-header,
+.ws-theme-footer {
+  color: #444444;
+}
+
+.ws-theme-header,
+.ws-theme-sidebar {
+  display: none;
+}
+
+.ws-theme-content,
+.ws-theme-sidebar {
+  overflow-x: visible;
+}
+.ws-theme-content-inner,
+.ws-theme-sidebar-inner {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.ws-theme-body {
+  padding-top: 15px;
+}
+
+.ws-theme-content-inner {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #FFF;
+}
+
+.ws-theme-footer {
+  text-align: center;
+}
+.ws-theme-footer-inner {
+  padding: 15px;
+}
+.ws-theme-footer .WikiLicense img {
+  vertical-align: text-bottom;
+}
+
+@media (min-width: 768px) {
+  body {
+    background: url(https://ssl.wikicdn.com/_/2537888v/i/theme_wood.jpg);
+  }
+
+  .ws-theme-container {
+    width: auto;
+  }
+
+  .ws-theme-header,
+  .ws-theme-sidebar {
+    display: block;
+  }
+
+  .ws-theme-header .ws-theme-menu {
+    background: #80A7D9 url(https://ssl.wikicdn.com/_/4qkjx897/i/theme_header_overlay.png) repeat-x;
+    border-bottom: 1px solid #BBB;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+  }
+  .ws-theme-header .ws-theme-menu-inner {
+    padding: 10px 0;
+  }
+  .ws-theme-header .WikiActions {
+    margin: 0 0 0 12px;
+    padding: 0;
+  }
+  .ws-theme-header .WikiActions li {
+    display: inline-block;
+    list-style-type: none;
+    padding-right: 15px;
+    white-space: nowrap;
+  }
+  .ws-theme-header .WikiActions div {
+    display: inline-block;
+  }
+  .ws-theme-header .WikiActionSupplemental {
+    margin-left: 4px;
+  }
+  .ws-theme-header-inner {
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+    font-size: 1.5em !important;
+    font-weight: normal !important;
+  }
+  .ws-theme-header-inner a {
+    font-size: inherit !important;
+  }
+
+  .ws-theme-content {
+    width: auto;
+    margin-right: 200px;
+    padding-right: 5px;
+    padding-left: 73px;
+    float: none;
+  }
+  .ws-theme-content-inner {
+    float: left;
+    width: 100%;
+  }
+  .ws-theme-content-inner:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -73px;
+    width: 73px;
+    background: url(https://ssl.wikicdn.com/_/q85x653j/i/theme_spiral.png) repeat-y 0 -6px;
+  }
+
+  .ws-theme-sidebar {
+    float: right;
+  }
+  .ws-theme-sidebar a {
+    color: #0000FF;
+  }
+  .ws-theme-sidebar-inner {
+    padding: 10px;
+    background-color: #EDEDE6;
+    border: 1px solid #BFBA96;
+  }
+  .ws-theme-sidebar .WikiCustomNav ol {
+    padding-left: 16px;
+  }
+  .ws-theme-sidebar .WikiCustomNav ol.includePageList {
+    padding-left: 0;
+  }
+  .ws-theme-sidebar .WikispacesNavbar {
+    margin: 0 -10px;
+    padding: 0 10px;
+  }
+  .ws-theme-sidebar .ws-theme-nav-edit {
+    color: #666;
+    text-align: center;
+  }
+  .ws-theme-sidebar .ws-theme-nav-edit a {
+    color: inherit;
+  }
+}
+/* End theme-specific styles */
+</style>
+<link rel="stylesheet" href="https://arduino-info.wikispaces.com/stylesheet/view/583997825-217420326D.gz.css" type="text/css" />
+<link rel="stylesheet" href="https://ssl.wikicdn.com/s/gz/9jvvjv40-internal-bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="https://ssl.wikicdn.com/s/gz/vz033906-internal.css" type="text/css" />
+<script src="https://ssl.wikicdn.com/s/gz/52vxz59q-top.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+
+  var wsGoogleAccount = 'UA-80504-1';
+  _gaq.push(['_setAccount', wsGoogleAccount]);
+  _gaq.push(['_gat._anonymizeIp']);
+  _gaq.push(['_setDomainName', 'wikispaces.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_setCustomVar', 2, 'Authenticated', 'Guest', 2]);
+  _gaq.push(['_trackPageview']);
+</script></head>
+<body><a href="#WikiContent" class="hidden sr-only sr-only-focusable">Skip to main content</a><div id="js-fixed-header-holder" class="fixed"><div class="WikispacesContent WikispacesBs3" role="banner">
+      
+    <div class="ws-main-top-nav visible-xs">
+    <div class="navbar navbar-static-top" style="margin-bottom: 0;">
+      <div class="container">
+                <div class="navbar-header">
+          <div class="visible-xs pull-left">
+            <a href="/space/menu" class="WikispacesDialogLink btn navbar-btn">
+              <i class="fa fa-bars"></i>
+            </a>
+          </div>
+          <div class="visible-xs pull-right js-globalnav-popover-container">
+                        <a href="https://www.wikispaces.com/site/signin?goto=https%3A%2F%2Farduino-info.wikispaces.com%2FBrick-Temperature-DS18B20%3FresponseToken%3D0d77cb61f8bb3ae141210fb85e1f8ce63" class="btn navbar-btn ws-mobile-guest-username js-globalnav-popover-trigger">
+              guest
+            </a>
+                        <div class="hidden js-globalnav-popover-content">
+              <div class="WikispacesContent WikispacesBs3">
+                <div class="WikiInternalHeaderNav noHide">
+  <div class="WikiInternalHeaderNavMenu">
+                          
+                  <span class="WikiInternalHeaderNavMenuArea"><a href="https://www.wikispaces.com/user/join?goto=https%3A%2F%2Farduino-info.wikispaces.com%2Fspace%2Fjoin" rel="nofollow" class="WikispacesXDomainDialogLink">Join</a></span>
+
+          <span class="divider">|</span>
+        
+        <span class="WikiInternalHeaderNavMenuArea"><a class="js-help-trigger" rel="nofollow" href="http://helpcenter.wikispaces.com/">Help</a></span>
+
+        <span class="divider">|</span>
+      
+      <span class="WikiInternalHeaderNavMenuArea"><a href="https://www.wikispaces.com/site/signin?goto=https%3A%2F%2Farduino-info.wikispaces.com%2FBrick-Temperature-DS18B20%3FresponseToken%3D0d77cb61f8bb3ae141210fb85e1f8ce63" rel="nofollow" class="WikispacesXDomainDialogLink">Sign In</a></span>
+      </div>
+</div>              </div>
+            </div>
+          </div>
+          <div class="ws-navbar-middle-xs">
+            <div class="navbar-brand" role="navigation">
+              <a href="https://www.wikispaces.com/" class="ws-logo"></a>
+              <i class="fa fa-angle-right"></i>
+              <a href="https://arduino-info.wikispaces.com/">arduino-info</a>
+                              <i class="fa fa-angle-right"></i> <a href="https://arduino-info.wikispaces.com/home">Home</a>
+              
+            </div>
+          </div>
+                    <form action="/search/view" method="post" class="navbar-form ws-include-xs pull-left ws-navbar-search hidden-xs" role="search"><input type="hidden" name="wikispacesFormToken" value="b641d58b49c255cc90880a2a11b646800947bfd2"/><input type="text" class="form-control search-query" name="q" value="" placeholder="Search" /> </form>
+                  </div>
+      </div>
+    </div>
+  </div>
+      <div class="hidden-xs"><div class="WikiInternalHeaderNav WikiElement floating">
+  <div class="WikiInternalHeaderNavMenu">
+                                    <span class="WikiInternalHeaderNavMenuArea guestUserName">guest</span><span class="slideMarker divider">|</span>
+        
+                  <span class="WikiInternalHeaderNavMenuArea"><a href="https://www.wikispaces.com/user/join?goto=https%3A%2F%2Farduino-info.wikispaces.com%2Fspace%2Fjoin" rel="nofollow" class="WikispacesXDomainDialogLink">Join</a></span>
+
+          <span class="divider">|</span>
+        
+        <span class="WikiInternalHeaderNavMenuArea"><a class="js-help-trigger" rel="nofollow" href="http://helpcenter.wikispaces.com/">Help</a></span>
+
+        <span class="divider">|</span>
+      
+      <span class="WikiInternalHeaderNavMenuArea"><a href="https://www.wikispaces.com/site/signin?goto=https%3A%2F%2Farduino-info.wikispaces.com%2FBrick-Temperature-DS18B20%3FresponseToken%3D0d77cb61f8bb3ae141210fb85e1f8ce63" rel="nofollow" class="WikispacesXDomainDialogLink">Sign In</a></span>
+      </div>
+</div></div>
+  </div></div><div id="js-fixed-header-offset">
+<header class="ws-theme-header" role="banner">
+  <nav class="ws-theme-menu" role="navigation">
+    <div class="ws-theme-container">
+      <div class="ws-theme-menu-inner">
+        <ul class="WikiActions WikiElement WikiControls">
+    <li id="WikiActionHome"><div><span class="WikiActionSupplemental" style="float: right;"></span><a href="https://arduino-info.wikispaces.com/"><i class="fa fa-home fa-fw"></i></a><a href="https://arduino-info.wikispaces.com/">Wiki Home</a></div></li>
+    <li id="WikiActionChanges"><div><span class="WikiActionSupplemental" style="float: right;"></span><a href="/wiki/changes"><i class="fa fa-clock-o fa-fw"></i></a><a href="/wiki/changes">Recent Changes</a></div></li>
+    <li id="WikiActionPagesAndFiles"><div><span class="WikiActionSupplemental" style="float: right;"></span><a href="/space/content"><i class="fa fa-file-text-o fa-fw"></i></a><a href="/space/content">Pages and Files</a></div></li>
+    <li id="WikiActionMembers"><div class="js-member-link"><span class="WikiActionSupplemental" style="float: right;"></span><a href="/wiki/members"><i class="fa fa-user fa-fw"></i></a><a href="/wiki/members">Members</a></div></li>
+</ul>
+      </div>
+    </div>
+  </nav>
+  <div class="ws-theme-container">
+    <div class="ws-theme-header-inner">
+      <a href="https://arduino-info.wikispaces.com/" class="WikiLogo WikiElement"><img src="https://arduino-info.wikispaces.com/space/showlogo/1523790843/logo.jpg" alt="arduino-info" /></a>    </div>
+  </div>
+</header>
+
+<div class="ws-theme-body">
+  <div class="ws-theme-container">
+    <div class="ws-theme-body-inner">
+      <nav class="ws-theme-sidebar" role="navigation">
+        <div class="ws-theme-sidebar-inner">
+          <div class="ws-theme-menu">
+            <div class="ws-theme-menu-inner">
+              <form action="/search/view" method="post" class="WikiSearch WikiElement" role="search"><input type="text" class="form-control WikiSearchInput" name="q" value="" placeholder="Search" /> </form>              <div class="WikiCustomNav WikiElement wiki"><h2><a class="wiki_link" href="/HOME">HOME</a></h2>
+ <h2><a class="wiki_link" href="http://arduino-info.wikispaces.com/About-Contact">ABOUT US!</a></h2>
+ <h3><span style="color: #ff0037;"><a class="wiki_link_ext" href="http://yourduino.com/sunshop2/" rel="nofollow">YourDuinoShop</a></span></h3>
+ <h3><span style="color: #ff0000;"><a class="wiki_link" href="http://arduino-info.wikispaces.com/Newsletters">NEWSLETTERS</a></span></h3>
+ <h2><a class="wiki_link_ext" href="http://arduinoinfo.info/blog/" rel="nofollow">BLOG</a></h2>
+ <h2><a class="wiki_link" href="/WikiFolk">THIS WIKI:</a></h2>
+ <hr />
+<hr />
+<span style="font-size: 26px; line-height: 30px;"><strong><a class="wiki_link" href="http://arduino-info.wikispaces.com/Arduino-What-IS-it">WHAT IS Arduino?</a></strong></span><br />
+<hr />
+<span style="font-size: 26px; line-height: 30px;"><strong>LEARNING Arduino:</strong></span><br />
+<ul><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/Arduino-What-IS-it">Arduino: WhatIsIt?</a></li><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/YourDuinoStarter">Hands-On Learning</a></li><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/YourDuinoStarterSoftwareSketches">Example Sketches</a></li><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/Arduino-Libraries">Arduino Libraries</a></li></ul><hr />
+<strong><span style="font-size: 26px;">ARDUINO HOWTO:</span></strong><br />
+<ul><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/Cables">CABLES, WIRES and PINS</a></li><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/SensorShield">SENSOR SHIELD</a></li><li><a class="wiki_link" href="/ArduinoPower">ARDUINO POWER</a></li><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/Servos">SERVO MOTORS</a></li><li><a class="wiki_link" href="/Nrf24L01-2.4GHz-HowTo">WIRELESS nRF24L01</a></li><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/LCD-Blue-I2C">LCD DISPLAYS</a></li><li><a class="wiki_link" href="/SD-Cards">SD CARDS</a></li><li><a class="wiki_link" href="/UltraSonicDistance">Ultrasonic Sensors</a></li><li><a class="wiki_link" href="http://arduino-info.wikispaces.com/Brick-Temperature-DS18B20">TemperatureSensor</a></li><li><a class="wiki_link" href="/IR-RemoteControl">IR Remotes</a></li><li><a class="wiki_link" href="/StepperMotors">Stepper Motors</a></li><li><a class="wiki_link" href="/DS1307_RealTime_Clock_Brick">RealTimeClock</a></li><li><a class="wiki_link" href="/Keyboards-MultipleButtons">Keyboards/Buttons</a></li><li><a class="wiki_link" href="/Arduino-PWM-Frequency">PWM Frequencies</a></li><li><a class="wiki_link" href="/Analog-Output">Analog Output</a></li><li><a class="wiki_link" href="/TUTORIALS">TUTORIALS</a></li></ul><br />
+<a class="wiki_link" href="/Collaborate">BJK</a><br />
+<a class="wiki_link" href="http://arduino-info.wikispaces.com/Listing_File_List">C</a></div>              <div class="ws-theme-nav-edit">
+                              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main class="ws-theme-content" role="main">
+        <div class="ws-theme-content-inner">
+          <div class="contentBox"><div class="innerContentBox" id="WikiContent">
+
+<script type="text/template" id="comment-footer-template">
+
+<div class="commentFooter modal-footer">
+  <div class="pull-left">
+    <button type="button" class="btn btn-default btn-sm previous"><i class="fa fa-arrow-left"></i></button>
+    <button type="button" class="btn btn-default btn-sm next"><i class="fa fa-arrow-right"></i></button>
+  </div>
+  <% if (ws.context.user.canAdministerWiki && !ws.comments.Manager.readOnly) { %>
+  <div class="pull-right">
+    <button type="button" class="btn btn-default btn-sm remove">Remove</button>
+  </div>
+  <% } %>
+</div>
+
+</script>
+
+<script type="text/template" id="comment-content-template">
+<div class="ws-box commentView">
+  <div class="comment-close">
+    <button type="button" class="closeme close" aria-hidden="true"><i class="fa fa-times"></i></button>
+  </div>
+  <div class="commentHeader">
+    <p class="ws-stream-meta command-context">
+      <a class="userLink userLinkPicture" href="<%= userCreated.url %>"><img class="userPicture" src="<%= userCreated.imageUrl %>" width="16" height="16"></a>
+      <a href="<%= userCreated.url %>"><%= userCreated.username %></a>
+      <% if (smartDate == '__live__') { %>
+      <abbr class="timeago" title="<%= (new Date(parseInt(dateCreated, 10) * 1000)).toISOString() %>">
+        <%= dateCreated %>
+      </abbr>
+      <% } else { %>
+        <%- smartDate %>
+      <% } %>
+      <% if (ws.context.user.canAdministerWiki && ws.comments.Manager.readOnly) { %>
+        <i class="fa fa-trash-o contextual-command delete ws-tip" title="Delete Comment"></i>
+      <% } %>
+    </p>
+  </div>
+
+  <div class="commentBody">
+    <div class="commentContent">
+      <%= description %>
+    </div>
+
+      <% for(i = 0; i < replyPages.length; i++) { %>
+        <% for(var j = 0; j < replyPages[i].digests.length; j++) { %>
+      <div class="commentReply" data-id="<%= replyPages[i].digests[j].id %>">
+        <p class="ws-stream-meta command-context">
+          <a class="userLink userLinkPicture" href="<%= replyPages[i].digests[j].userCreated.url %>"><img class="userPicture" src="<%= replyPages[i].digests[j].userCreated.imageUrl %>" width="16" height="16"></a>
+          <a href="<%= replyPages[i].digests[j].userCreated.url %>"><%= replyPages[i].digests[j].userCreated.username %></a>
+          <% if (smartDate == '__live__') { %>
+          <abbr class="timeago" title="<%= (new Date(parseInt(replyPages[i].digests[j].dateCreated, 10) * 1000)).toISOString() %>">
+            <%= new Date(parseInt(replyPages[i].digests[j].dateCreated, 10) * 1000).toLocaleString() %>
+          </abbr>
+          <% } else { %>
+            <%- smartDate %>
+          <% } %>
+          <% if (ws.context.user.canAdministerWiki) { %>
+          <i class="fa fa-trash-o contextual-command delete-reply ws-tip" title="Delete Reply"></i>
+          <% } %>
+          </p>
+        <div class="commentContent"><%= replyPages[i].digests[j].body %></div>
+      </div>
+        <% } %>
+      <% } %>
+
+      <form class="reply commentReply">
+        <div class="form-group">
+          <textarea name="reply" placeholder="Reply" class="form-control" /></textarea>
+        </div>
+        <div class="btn-toolbar">
+          <button type="submit" class="btn btn-primary btn-sm" name="go" value="1">Post</button>
+
+          <% if (ws.context.user.id) { %>
+            <% if (monitored) { %>
+            <button type="button" class="btn btn-default btn-sm pull-right toggle-monitor ws-tip active" title="You are monitoring replies."><i class="fa fa-eye"></i></button>
+            <% } else { %>
+            <button type="button" class="btn btn-default btn-sm pull-right toggle-monitor ws-tip" title="You are not monitoring replies."><i class="fa fa-eye"></i></button>
+            <% } %>
+          <% } %>
+          <% if (ws.context.user.canAdministerWiki) { %>
+            <% if (locked) { %>
+            <button type="button" class="btn btn-default btn-sm pull-right toggle-lock ws-tip active" title="Replies are not allowed."><i class="fa fa-lock"></i></button>
+            <% } else { %>
+            <button type="button" class="btn btn-default btn-sm pull-right toggle-lock ws-tip" title="Replies are allowed."><i class="fa fa-lock"></i></button>
+            <% } %>
+          <% } %>
+
+          <i class="fa fa-spinner fa-spin spinner pull-right hidden"></i>
+        </div>
+      </form>
+   </div>
+
+   
+<div class="commentFooter modal-footer">
+  <div class="pull-left">
+    <button type="button" class="btn btn-default btn-sm previous"><i class="fa fa-arrow-left"></i></button>
+    <button type="button" class="btn btn-default btn-sm next"><i class="fa fa-arrow-right"></i></button>
+  </div>
+  <% if (ws.context.user.canAdministerWiki && !ws.comments.Manager.readOnly) { %>
+  <div class="pull-right">
+    <button type="button" class="btn btn-default btn-sm remove">Remove</button>
+  </div>
+  <% } %>
+</div>
+
+</div>
+</script>
+
+<script type="text/template" id="comment-composer-template">
+<div class="ws-box commentView">
+  <div class="commentComposer">
+    <div class="comment-close">
+      &nbsp;<button type="button" class="close closeme" aria-hidden="true"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="commentHeader">
+      <p class="ws-stream-meta command-context">
+        <img class="userPicture" src="<%= userCreated.imageUrl %>" width="16" height="16">
+        <a href="#" onclick="return false;"><%= userCreated.username %></a>
+      </p>
+    </div>
+    <div class="commentBody">
+      <textarea name="comment" class="compose form-control" placeholder="Comment"/></textarea><br/>
+      <div class="btn-toolbar">
+        <button type="button" class="btn btn-default btn-sm monitored active pull-right" style="margin-left: 6px" onclick="jQuery(this).toggleClass('active')"><i class="fa fa-eye"></i></button>
+        <button type="button" class="btn btn-default btn-sm locked btn-toggle pull-right" onclick="jQuery(this).toggleClass('active')"><i class="fa fa-lock"></i></button>
+        <button type="button" class="btn btn-primary btn-sm closeme">Save</button>
+      </div>
+    </div>
+  </div>
+
+  
+<div class="commentFooter modal-footer">
+  <div class="pull-left">
+    <button type="button" class="btn btn-default btn-sm previous"><i class="fa fa-arrow-left"></i></button>
+    <button type="button" class="btn btn-default btn-sm next"><i class="fa fa-arrow-right"></i></button>
+  </div>
+  <% if (ws.context.user.canAdministerWiki && !ws.comments.Manager.readOnly) { %>
+  <div class="pull-right">
+    <button type="button" class="btn btn-default btn-sm remove">Remove</button>
+  </div>
+  <% } %>
+</div>
+
+</div>
+</script>
+
+<script type="text/template" id="comment-proxy-template">
+<div class="comment-proxy">
+  <span class="commentUser">
+  <% if (userCreated) { %>
+    <img class="userPicture" src="<%= userCreated.imageUrl %>" width="16" height="16">
+  <% } else { %>
+    <img class="userPicture" src="<%= ws.context.user.imageUrlPrefix %>sm.jpg" width="16" height="16">
+  <% } %>
+  </span>
+  <span class="commentReplies"><%= 1 + _(replyPages).reduce(function(memo, page){ return memo + page.digests.length; }, 0) %></span>
+</div>
+</script>
+
+<div class="ws-menu-bar WikiControls WikispacesContent WikispacesBs3">
+  
+    <h1 class="pageTitle"><a href="/Brick-Temperature-DS18B20">Brick-Temperature-DS18B20</a></h1>
+      <div class="btn-group pull-right">
+          <span class="btn btn-default disabled tipme" title="you do not have permission to edit this page"><i class="fa fa-pencil fa-fw"></i> Edit</span>          <a class="btn btn-default tipme" title="view 7 discussion posts" href="/Brick-Temperature-DS18B20#discussion"><i class="fa fa-comments fa-fw"></i> 7</a>          <a class="btn btn-default tipme" title="view 121 revisions" href="/page/history/Brick-Temperature-DS18B20"><i class="fa fa-clock-o fa-fw"></i> 121</a>          <a class="btn btn-default ws-btn-more dropdown-toggle tipme" title="more options" href="/page/menu/Brick-Temperature-DS18B20"><i class="icon-height-only fa-fw"></i>&hellip;</a>        <ul class="ws-more-menu dropdown-menu dropdown-menu-right">
+              <li class=" dropdown"><a class=" ws-tag-dropdown-toggle" href="/page/tags/Brick-Temperature-DS18B20"><span class="pull-right">0</span> <i class="fa fa-tag fa-fw"></i> Tags</a>
+          <div class="dropdown-menu dropdown-menu-right ws-tag-dropdown-menu">
+          
+
+
+
+<form action="#" name="WikiTagForm" class="WikiTagForm"><input type="hidden" name="wikispacesFormToken" value="c8eda5e8fc7105422d591aa47bf40c2fa7912fd4"/><input type="hidden" name="wikispacesFormToken" value="c8eda5e8fc7105422d591aa47bf40c2fa7912fd4"/>
+  <div class="WikiTagList">
+    <i class="fa fa-tag ws-action"></i>
+        <ul class="list-unstyled">
+          <li>No tags</li>
+        </ul>
+      </div>
+  </form>      </div>
+    </li>
+              <li class="divider"></li>
+            <li class=""><a class=" WikispacesDialogLink" href="https://arduino-info.wikispaces.com/wiki/addmonitor?monitorLink=page%3ABrick-Temperature-DS18B20"><i class="fa fa-eye fa-fw"></i> Notify</a>
+    </li>
+        <li class=""><a class=" WikispacesDialogLink" href="/page/rss/Brick-Temperature-DS18B20"><i class="fa fa-rss fa-fw"></i> RSS</a>
+    </li>
+        <li class=""><a class="" href="/page/links/Brick-Temperature-DS18B20"><i class="fa fa-link fa-fw"></i> Backlinks</a>
+    </li>
+              <li class="divider"></li>
+            <li class=""><a class="" href="/page/code/Brick-Temperature-DS18B20"><i class="fa fa-code fa-fw"></i> Source</a>
+    </li>
+        <li class=""><a class="" href="/Brick-Temperature-DS18B20?f=print"><i class="fa fa-print fa-fw"></i> Print</a>
+    </li>
+        <li class=""><a class="" href="/page/pdf/Brick-Temperature-DS18B20"><i class="fa fa-cloud-download fa-fw"></i> Export (PDF)</a>
+    </li>
+      </ul>  </div>
+  </div>
+
+
+
+
+  <textarea class="form-control" id="autosaveContent" style="display:none;" rows="1" cols="1"></textarea>
+  <div id="autosavePrompt" style="display:none;"></div>
+
+<div class="commentContainer">
+  <div class="commentSubject">
+  <div class="wiki wikiPage" id="content_view">
+  <!-- ws:start:WikiTextVariableComponentRule:03:[[{$server}/{$page|url}?f=print|print this page]] --><a href="https://arduino-info.wikispaces.com/Brick-Temperature-DS18B20?f=print">print this page</a><!-- ws:end:WikiTextVariableComponentRule:03 --><br />
+<!-- ws:start:WikiTextHeadingRule:11:&lt;h2&gt; --><h2 id="toc0"><a name="x-Temperature Sensor DS18B20"></a><!-- ws:end:WikiTextHeadingRule:11 -->Temperature Sensor DS18B20</h2>
+ (See Thermocouples for high temperatures <a class="wiki_link" href="http://arduino-info.wikispaces.com/%20Brick-Temperature-Thermocouple">HERE)</a><br />
+<!-- ws:start:WikiTextLocalImageRule:94:&lt;img src=&quot;/file/view/DS18B20-brick.jpg/543661692/435x315/DS18B20-brick.jpg&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;height: 315px; width: 435px;&quot; align=&quot;right&quot; /&gt; --><img src="/file/view/DS18B20-brick.jpg/543661692/435x315/DS18B20-brick.jpg" alt="DS18B20-brick.jpg" title="DS18B20-brick.jpg" style="height: 315px; width: 435px;" align="right" /><!-- ws:end:WikiTextLocalImageRule:94 --><br />
+<!-- ws:start:WikiTextHeadingRule:13:&lt;h2&gt; --><h2 id="toc1"><a name="x-Electronic Brick, Waterproof and other Versions"></a><!-- ws:end:WikiTextHeadingRule:13 -->Electronic Brick, Waterproof and other Versions</h2>
+ <br />
+NOTE: There are different-appearing versions but they work the same.<br />
+<br />
+This is an electronic thermometer which has high accuracy over a wide range (accurate to ±0.5°C over the range of -10°C to +85°C) (Workable from -55°C to +125°C).<span style="line-height: 1.5;"> You can locate these thermometer chips up to 100M away from your Arduino. Shorter cables can be just 2 wires. NOTE: There must be a pullup resistor of about 5K in all cases, but the Brick versions have this included. </span><br />
+<br />
+<!-- ws:start:WikiTextRemoteImageRule:112:&lt;img src=&quot;http://arduino-direct.com/sunshop/images/products/detail_134_ds18b20-3.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;right&quot; /&gt; --><img src="http://arduino-direct.com/sunshop/images/products/detail_134_ds18b20-3.jpg" alt="external image detail_134_ds18b20-3.jpg" title="external image detail_134_ds18b20-3.jpg" align="right" /><!-- ws:end:WikiTextRemoteImageRule:112 --><br />
+Multiple thermometers can be connected on the same wire because every one has it's own internal address. This is the &quot;1-wire&quot; bus system<a class="wiki_link_ext" href="http://en.wikipedia.org/wiki/1-Wire" rel="nofollow"> (Wikipedia).</a> Below is an example of reading up to 5 DS18B20's on a single Arduino pin. This requires that you know the internal address of each sensor. A utility sketch to find the address is also below.<br />
+<br />
+Here (right) is what the individual chip sensors look like, and their pinout:<br />
+<!-- ws:start:WikiTextLocalImageRule:95:&lt;img src=&quot;/file/view/DS18B20-pinout.JPG/543660592/DS18B20-pinout.JPG&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;right&quot; /&gt; --><img src="/file/view/DS18B20-pinout.JPG/543660592/DS18B20-pinout.JPG" alt="DS18B20-pinout.JPG" title="DS18B20-pinout.JPG" align="right" /><!-- ws:end:WikiTextLocalImageRule:95 --><br />
+Here are links to more about the DS18B20 and other &quot;1-Wire&quot; chips:<br />
+<br />
+<br />
+<br />
+<ul><li><a class="wiki_link" href="/Brick-Temperature-DS18B20#test1">TEST PROGRAM: single DS18B20 Temperature Sensor</a></li><li><span style="background-color: #ffffff;"><a class="wiki_link" href="http://arduino-info.wikispaces.com/MultipleTemperatureSensorsToLCD">Example that displays multiple DS18B20 temperatures on a 4-line LCD Display </a></span></li><li><a class="wiki_link_ext" href="http://www.maxim-ic.com/datasheet/index.mvp/id/2812" rel="nofollow">The DS18B20 Data Sheet</a></li><li><a class="wiki_link_ext" href="http://download.milesburton.com/Arduino/MaximTemperature/DallasTemperature_372Beta.zip" rel="nofollow">The updated &quot;DallasTemperature&quot; Library (zip file)</a></li><li><a class="wiki_link_ext" href="http://www.pjrc.com/teensy/arduino_libraries/OneWire.zip" rel="nofollow">The updated &quot;1-Wire&quot; Library</a> (zip file)</li><li><a class="wiki_link_ext" href="http://www.arduino.cc/playground/Learning/OneWire" rel="nofollow">The Arduino Site: &quot;1-Wire&quot; information</a></li><li><a class="wiki_link_ext" href="http://www.milesburton.com/?title=Dallas_Temperature_Control_Library" rel="nofollow">The Software Library and information from Miles Burton</a></li><li><!-- ws:start:WikiTextLocalImageRule:97:&lt;a href=&quot;http://arduino-info.wikispaces.com/Brick-Temperature-DS18B20#mult&quot;&gt;&lt;img src=&quot;http://arduino-info.wikispaces.com/file/view/DS18B20-Wiring.jpg/543661142/DS18B20-Wiring.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;right&quot; /&gt;&lt;/a&gt; --><a href="http://arduino-info.wikispaces.com/Brick-Temperature-DS18B20#mult"><img src="http://arduino-info.wikispaces.com/file/view/DS18B20-Wiring.jpg/543661142/DS18B20-Wiring.jpg" alt="DS18B20-Wiring.jpg" title="DS18B20-Wiring.jpg" align="right" /></a><!-- ws:end:WikiTextLocalImageRule:97 --><a class="wiki_link" href="/Brick-Temperature-DS18B20#TS">Schematic Diagram of this Brick</a></li><li><a class="wiki_link" href="/Brick-Temperature-DS18B20#TS">Stainless Steel type Temperature Probe</a></li><li><a class="wiki_link" href="/Brick-Temperature-DS18B20#mult">HOW-TO Connect several DS18B20 on same wires&gt; </a></li><li><a class="wiki_link" href="/Brick-Temperature-DS18B20#Read%20individual">Read individual DS18B20 Internal Addresses:</a></li><li><a class="wiki_link" href="/Brick-Temperature-DS18B20#Test%20Sketch%20to%20read%20DS18B20%20addresses">Test Sketch to read DS18B20 addresses</a></li><li><a class="wiki_link" href="/Brick-Temperature-DS18B20#multibus">Multiple 1-Wire Buses on 1 Arduino</a></li><li><a class="wiki_link_ext" href="http://www.maximintegrated.com/products/1-wire/flash/overview/index.cfm" rel="nofollow">MAXIM Detailed 1-Wire Protocol Presentation</a></li><li><a class="wiki_link" href="/Brick-Temperature-DS18B20#Long">LONG Cables for DS18B20</a></li><li><a class="wiki_link_ext" href="http://www.maximintegrated.com/app-notes/index.mvp/id/148" rel="nofollow">MAXIM Application note about Long Cables</a></li></ul><br />
+<!-- ws:start:WikiTextLocalImageRule:98:&lt;img src=&quot;/file/view/ds18b20-4s.jpg/220980614/ds18b20-4s.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;right&quot; /&gt; --><img src="/file/view/ds18b20-4s.jpg/220980614/ds18b20-4s.jpg" alt="ds18b20-4s.jpg" title="ds18b20-4s.jpg" align="right" /><!-- ws:end:WikiTextLocalImageRule:98 --><br />
+The DS18B20 Brick is the easiest way to get connected and measure temperatures. You can buy individual chips for about $1.50 <a class="wiki_link_ext" href="http://yourduino.com/sunshop2/index.php?l=product_detail&amp;p=134" rel="nofollow">here.</a> or the Brick shown above, with a cable, for $3.50 <a class="wiki_link_ext" href="http://yourduino.com/sunshop2/index.php?l=product_detail&amp;p=262" rel="nofollow">here.</a> Or a waterproofed version <a class="wiki_link_ext" href="http://yourduino.com/sunshop2/index.php?l=product_detail&amp;p=151" rel="nofollow">here:</a><br />
+<br />
+The easy way to get connected is to simply plug the supplied cable into a <a class="wiki_link" href="http://arduino-info.wikispaces.com/YourDuino-RoboRED">YourDuinoRoboRED</a> with built-in 3-pin connectors, or a <a class="wiki_link" href="/SensorShield">Sensor Shield</a> that plugs on top of an Arduino like this (right):<br />
+<br />
+Plug your DS18B20 Brick's cable into I/O pin connector 3 on Robo1 or 2 on a sensor shield. (NOTE! Pin numbers start with Zero).<br />
+<br />
+<!-- ws:start:WikiTextHeadingRule:15:&lt;h3&gt; --><h3 id="toc2"><a name="x-Electronic Brick, Waterproof and other Versions-How does this Work??"></a><!-- ws:end:WikiTextHeadingRule:15 -->How does this Work??</h3>
+ Now, let's think for a minute about what we're doing here. The earlier devices we connected were simple: Switches, LEDs, Potentiometers, etc. A single component. This is different: we are connecting to a chip that has hundreds of transistors inside it and dozens of possible functions. It expects us to send it commands and it will return data as lots of signal pulses of 1's and 0's. How will we communicate with it? Fortunately, we're not in an empty room. We're in a library. On the shelves, free for us to check out, are lots of already-published Arduino functions that we can use. We will use two library check-outs to run our temperature sensor that other people have spent 100's of hours working on, and given us unlimited copies to check out. (Terry's wife designs Libraries.<a class="wiki_link_ext" href="http://www.terryking.us/maryalice/LibSlideShowJob10/slides/1SIS08.JPG" rel="nofollow"> Here's one she designed in China:</a> )<br />
+<!-- ws:start:WikiTextAnchorRule:37:&lt;img src=&quot;/i/anchor.gif&quot; class=&quot;WikiAnchor&quot; alt=&quot;Anchor&quot; id=&quot;wikitext@@anchor@@test1&quot; title=&quot;Anchor: test1&quot;/&gt; --><a name="test1"></a><!-- ws:end:WikiTextAnchorRule:37 --><br />
+To make this work, you <strong>MUST</strong> download and install the two libraries for <strong>One-wire devices</strong> and <strong>DallasTemperature chips</strong> and copy them to your Arduino software installation Library folder. (See above).<br />
+(each one is called a &quot;Library&quot; not a Book! )<br />
+For more about Libraries see our <a class="wiki_link" href="/Arduino-Libraries">Arduino Libraries page.</a><br />
+<br />
+Then just copy and paste this test code (below) into your <a class="wiki_link" href="/GettingStarted-Software">Arduino IDE</a>:<br />
+NOTE: If using the YourDuinoRobo1, connect to pin 3 (and change the pin number in the code below to 3).<br />
+Then:<br />
+<ul><li><!-- ws:start:WikiTextLocalImageRule:99:&lt;img src=&quot;/file/view/ArduinoIDE-VerifyButton.jpg/220918908/ArduinoIDE-VerifyButton.jpg&quot; alt=&quot;&quot; title=&quot;&quot; /&gt; --><img src="/file/view/ArduinoIDE-VerifyButton.jpg/220918908/ArduinoIDE-VerifyButton.jpg" alt="ArduinoIDE-VerifyButton.jpg" title="ArduinoIDE-VerifyButton.jpg" /><!-- ws:end:WikiTextLocalImageRule:99 --> Click the VERIFY button. Soon you should see &quot;Compiling&quot; and &quot;Done Compiling&quot;</li><li><!-- ws:start:WikiTextLocalImageRule:100:&lt;img src=&quot;/file/view/ArduinoIDE-Upload-Button.jpg/220918906/ArduinoIDE-Upload-Button.jpg&quot; alt=&quot;&quot; title=&quot;&quot; /&gt; --><img src="/file/view/ArduinoIDE-Upload-Button.jpg/220918906/ArduinoIDE-Upload-Button.jpg" alt="ArduinoIDE-Upload-Button.jpg" title="ArduinoIDE-Upload-Button.jpg" /><!-- ws:end:WikiTextLocalImageRule:100 --> Click the UPLOAD button. You should see &quot;Uploading to IO Board&quot; and &quot;Done Uploading&quot;</li><li><!-- ws:start:WikiTextLocalImageRule:101:&lt;img src=&quot;/file/view/ArduinoIDE-Monitor-Button.jpg/220919346/ArduinoIDE-Monitor-Button.jpg&quot; alt=&quot;&quot; title=&quot;&quot; /&gt; --><img src="/file/view/ArduinoIDE-Monitor-Button.jpg/220919346/ArduinoIDE-Monitor-Button.jpg" alt="ArduinoIDE-Monitor-Button.jpg" title="ArduinoIDE-Monitor-Button.jpg" /><!-- ws:end:WikiTextLocalImageRule:101 --> Now, click the SERIAL MONITOR button. (Make sure you have the baud rate set to 9600 baud in lower right of Serial Monitor). A new window should pop up and scroll lines of results showing you.. Temperature!</li></ul>Troubleshooting?? Go back and get the original BLINK program working first. <a class="wiki_link" href="/GettingStarted-Software">Check Here:</a><br />
+<br />
+<!-- ws:start:WikiTextMediaRule:4:&lt;img src=&quot;http://www.wikispaces.com/site/embedthumbnail/custom/28686176?h=0&amp;w=0&quot; class=&quot;WikiMedia WikiMediaCustom&quot; id=&quot;wikitext@@media@@type=&amp;quot;custom&amp;quot; key=&amp;quot;28686176&amp;quot;&quot; title=&quot;Custom Media&quot;/&gt; --><pre>
+<font color="#95A5A6">/* YourDuino TEST: Temperature Sensor DS18B20</font>
+<font color="#95A5A6"> *  V1.2 08-26-2016</font>
+<font color="#95A5A6">- Connect cable to Arduino Digital I/O Pin 2</font>
+<font color="#95A5A6">terry@yourduino.com */</font>
+
+<font color="#95A5A6">/*-----( Import needed libraries )-----*/</font>
+<font color="#5E6D03">#include</font> <font color="#434F54">&lt;</font><b><font color="#D35400">OneWire</font></b><font color="#434F54">.</font><font color="#000000">h</font><font color="#434F54">&gt;</font>
+<font color="#5E6D03">#include</font> <font color="#434F54">&lt;</font><b><font color="#D35400">DallasTemperature</font></b><font color="#434F54">.</font><font color="#000000">h</font><font color="#434F54">&gt;</font>
+
+<font color="#95A5A6">/*-----( Declare Constants )-----*/</font>
+<font color="#5E6D03">#define</font> <font color="#000000">ONE_WIRE_BUS</font> <font color="#000000">2</font> <font color="#95A5A6">/*-(Connect to Pin 2 )-*/</font>
+
+<font color="#95A5A6">/*-----( Declare objects )-----*/</font>
+<font color="#95A5A6">/* Set up a oneWire instance to communicate with any OneWire device*/</font>
+<b><font color="#D35400">OneWire</font></b> <font color="#000000">ourWire</font><font color="#000000">(</font><font color="#000000">ONE_WIRE_BUS</font><font color="#000000">)</font><font color="#000000">;</font>
+
+<font color="#95A5A6">/* Tell Dallas Temperature Library to use oneWire Library */</font>
+<b><font color="#D35400">DallasTemperature</font></b> <font color="#000000">sensors</font><font color="#000000">(</font><font color="#434F54">&amp;</font><font color="#000000">ourWire</font><font color="#000000">)</font><font color="#000000">;</font>
+
+<font color="#95A5A6">/*-----( Declare Variables )-----*/</font>
+
+
+<font color="#00979C">void</font> <font color="#5E6D03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#95A5A6">/*----( SETUP: RUNS ONCE )----*/</font>
+<font color="#000000">{</font>
+<font color="#95A5A6">/*-(start serial port to see results )-*/</font>
+<font color="#D35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">begin</font><font color="#000000">(</font><font color="#000000">9600</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">println</font><font color="#000000">(</font><font color="#005C5F">"YourDuino.com: Temperature Sensor Test Program"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">println</font><font color="#000000">(</font><font color="#005C5F">"Temperature Sensor: DS18B20"</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#D35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+
+<font color="#95A5A6">/*-( Start up the DallasTemperature library )-*/</font>
+<font color="#000000">sensors</font><font color="#434F54">.</font><font color="#D35400">begin</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font><font color="#95A5A6">/*--(end setup )---*/</font>
+
+
+<font color="#00979C">void</font> <font color="#5E6D03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#95A5A6">/*----( LOOP: RUNS CONSTANTLY )----*/</font>
+<font color="#000000">{</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">println</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">print</font><font color="#000000">(</font><font color="#005C5F">"Requesting temperature..."</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">sensors</font><font color="#434F54">.</font><font color="#D35400">requestTemperatures</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#434F54">// Send the command to get temperatures</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">println</font><font color="#000000">(</font><font color="#005C5F">"DONE"</font><font color="#000000">)</font><font color="#000000">;</font>
+
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">print</font><font color="#000000">(</font><font color="#005C5F">"Device 1 (index 0) = "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">print</font><font color="#000000">(</font><font color="#000000">sensors</font><font color="#434F54">.</font><font color="#D35400">getTempCByIndex</font><font color="#000000">(</font><font color="#000000">0</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">println</font><font color="#000000">(</font><font color="#005C5F">" Degrees C"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">print</font><font color="#000000">(</font><font color="#005C5F">"Device 1 (index 0) = "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">print</font><font color="#000000">(</font><font color="#000000">sensors</font><font color="#434F54">.</font><font color="#D35400">getTempFByIndex</font><font color="#000000">(</font><font color="#000000">0</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#D35400">Serial</font></b><font color="#434F54">.</font><font color="#D35400">println</font><font color="#000000">(</font><font color="#005C5F">" Degrees F"</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#D35400">delay</font><font color="#000000">(</font><font color="#000000">5000</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font><font color="#95A5A6">/* --(end main loop )-- */</font>
+
+<font color="#95A5A6">/* ( THE END ) */</font>
+
+</pre><!-- ws:end:WikiTextMediaRule:4 --><br />
+<br />
+What You Should See (Your temperature may vary! Hold the sensor in your hand and see value increase):<br />
+<!-- ws:start:WikiTextCodeRule:0:
+&lt;pre class=&quot;text&quot;&gt;YourDuino.com: Temperature Sensor Test Program&lt;br/&gt;Temperature Sensor: DS18B20&lt;br/&gt;&lt;br/&gt;Requesting temperature...DONE&lt;br/&gt;Device 1 (index 0) = 25.12 Degrees C&lt;br/&gt;Device 1 (index 0) = 77.22 Degrees F&lt;br/&gt;&lt;/pre&gt;
+ -->
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">YourDuino.com: Temperature Sensor Test Program
+Temperature Sensor: DS18B20
+&nbsp;
+Requesting temperature...DONE
+Device 1 (index 0) = 25.12 Degrees C
+Device 1 (index 0) = 77.22 Degrees F
+&nbsp;</pre>
+
+<!-- ws:end:WikiTextCodeRule:0 -->If you see THIS there is a connection or sensor problem!<br />
+<!-- ws:start:WikiTextCodeRule:1:
+&lt;pre class=&quot;text&quot;&gt;YourDuino.com: Temperature Sensor Test Program&lt;br/&gt;Temperature Sensor: DS18B20&lt;br/&gt;&lt;br/&gt;Requesting temperature...DONE&lt;br/&gt;Device 1 (index 0) = -127.00 Degrees C&lt;br/&gt;Device 1 (index 0) = -196.60 Degrees F&lt;br/&gt;&lt;br/&gt;&lt;/pre&gt;
+ -->
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">YourDuino.com: Temperature Sensor Test Program
+Temperature Sensor: DS18B20
+&nbsp;
+Requesting temperature...DONE
+Device 1 (index 0) = -127.00 Degrees C
+Device 1 (index 0) = -196.60 Degrees F
+&nbsp;
+&nbsp;</pre>
+
+<!-- ws:end:WikiTextCodeRule:1 --><br />
+<br />
+<br />
+<br />
+Here's the schematic diagram of the Brick:<span style="color: #000000; font-family: arial,helvetica,sans-serif; font-size: 13px; line-height: 19px;"> <!-- ws:start:WikiTextAnchorRule:38:&lt;img src=&quot;/i/anchor.gif&quot; class=&quot;WikiAnchor&quot; alt=&quot;Anchor&quot; id=&quot;wikitext@@anchor@@TS&quot; title=&quot;Anchor: TS&quot;/&gt; --><a name="TS"></a><!-- ws:end:WikiTextAnchorRule:38 --></span><br />
+<!-- ws:start:WikiTextLocalImageRule:102:&lt;img src=&quot;/file/view/TempSensor_DS18B20_BrickDiag.jpg/221392140/TempSensor_DS18B20_BrickDiag.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;left&quot; /&gt; --><img src="/file/view/TempSensor_DS18B20_BrickDiag.jpg/221392140/TempSensor_DS18B20_BrickDiag.jpg" alt="TempSensor_DS18B20_BrickDiag.jpg" title="TempSensor_DS18B20_BrickDiag.jpg" align="left" /><!-- ws:end:WikiTextLocalImageRule:102 --><br />
+<br />
+<!-- ws:start:WikiTextLocalImageRule:103:&lt;img src=&quot;/file/view/TemperatureSensorDS18B20Waterproof-500.jpg/224459386/TemperatureSensorDS18B20Waterproof-500.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;right&quot; /&gt; --><img src="/file/view/TemperatureSensorDS18B20Waterproof-500.jpg/224459386/TemperatureSensorDS18B20Waterproof-500.jpg" alt="TemperatureSensorDS18B20Waterproof-500.jpg" title="TemperatureSensorDS18B20Waterproof-500.jpg" align="right" /><!-- ws:end:WikiTextLocalImageRule:103 --><br />
+And here is another form of exactly the same<br />
+DS18B20 temperature sensor in a waterproof stainless steel tube. These are <a class="wiki_link_ext" href="http://www.yourduino.com/sunshop/index.php?l=search_list&amp;s%5Bsearch%5D=ds18b20+waterproof&amp;s%5Btitle%5D=Y&amp;s%5Bshort_desc%5D=Y&amp;s%5Bfull_desc%5D=Y&amp;s%5Bsku%5D=Y&amp;s%5Bmatch%5D=all&amp;s%5Bcid%5D=0" rel="nofollow">Available Here</a>). You have the same connections to voltage and ground and signal, but you have to provide your own 4.7K &quot;pullup&quot; resistor which can be any small type resistor (two 10K resistors in parallel works well). Be careful to ensure the Signal and Ground connections are correct. If they are reversed, the sensor can get quite hot (even at such a low voltage).<!-- ws:start:WikiTextLocalImageRule:104:&lt;img src=&quot;/file/view/TempSensorConnector1-500.jpg/549715198/350x294/TempSensorConnector1-500.jpg&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;height: 294px; width: 350px;&quot; align=&quot;right&quot; /&gt; --><img src="/file/view/TempSensorConnector1-500.jpg/549715198/350x294/TempSensorConnector1-500.jpg" alt="TempSensorConnector1-500.jpg" title="TempSensorConnector1-500.jpg" style="height: 294px; width: 350px;" align="right" /><!-- ws:end:WikiTextLocalImageRule:104 --><br />
+<br />
+<br />
+<!-- ws:start:WikiTextLocalImageRule:105:&lt;img src=&quot;/file/view/TemperSensorSStube-DS18B20-1.jpg/223274280/375x480/TemperSensorSStube-DS18B20-1.jpg&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;height: 480px; width: 375px;&quot; align=&quot;left&quot; /&gt; --><img src="/file/view/TemperSensorSStube-DS18B20-1.jpg/223274280/375x480/TemperSensorSStube-DS18B20-1.jpg" alt="TemperSensorSStube-DS18B20-1.jpg" title="TemperSensorSStube-DS18B20-1.jpg" style="height: 480px; width: 375px;" align="left" /><!-- ws:end:WikiTextLocalImageRule:105 --><br />
+Here (above) is a photo of this sensor connected to a<a class="wiki_link_ext" href="http://yourduino.com/sunshop2/index.php?l=product_detail&amp;p=300" rel="nofollow"> &quot;3-pin Sensor&quot; connector</a>so that it can be connected like our regular Electronic Bricks. You can see the 4.7K pullup resistor connected between + and Signal.<br />
+<!-- ws:start:WikiTextHeadingRule:17:&lt;h3&gt; --><h3 id="toc3"><a name="x-Electronic Brick, Waterproof and other Versions-Sensor Connections: red (VCC), blue or white or yellow (DATA), black (GND)"></a><!-- ws:end:WikiTextHeadingRule:17 --><!-- ws:start:WikiTextMediaRule:5:&lt;img src=&quot;http://www.wikispaces.com/site/embedthumbnail/custom/27650196?h=0&amp;w=0&quot; class=&quot;WikiMedia WikiMediaCustom&quot; id=&quot;wikitext@@media@@type=&amp;quot;custom&amp;quot; key=&amp;quot;27650196&amp;quot;&quot; title=&quot;Custom Media&quot;/&gt; --><br clear="all" />
+<hr /><!-- ws:end:WikiTextMediaRule:5 -->Sensor Connections: red (VCC), blue or white or yellow (DATA), black (GND)</h3>
+ <!-- ws:start:WikiTextHeadingRule:19:&lt;h3&gt; --><h3 id="toc4"><a name="x-Electronic Brick, Waterproof and other Versions-Some Versions, like Adafruit, have these connections: Orange Stripe: (VCC) White: (GND) Blue Stripe:(DATA)"></a><!-- ws:end:WikiTextHeadingRule:19 -->Some Versions, like Adafruit, have these connections: Orange Stripe: (VCC) White: (GND) Blue Stripe:(DATA)</h3>
+ <!-- ws:start:WikiTextLocalImageRule:106:&lt;img src=&quot;http://arduino-info.wikispaces.com/file/view/TempSensorConnector2-500.jpg/549716028/350x163/TempSensorConnector2-500.jpg&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;height: 163px; width: 350px;&quot; align=&quot;right&quot; /&gt; --><img src="http://arduino-info.wikispaces.com/file/view/TempSensorConnector2-500.jpg/549716028/350x163/TempSensorConnector2-500.jpg" alt="TempSensorConnector2-500.jpg" title="TempSensorConnector2-500.jpg" style="height: 163px; width: 350px;" align="right" /><!-- ws:end:WikiTextLocalImageRule:106 --><br />
+And on the right is a handy connection method if you need to quickly connect many temperature sensors to get their addresses, like I do. That's one of those Stereo speaker connectors that you push the<br />
+button in and push the wire in place. Scavenged from an old Stereo. Notice the resistor (4.7K to 10K OK) on the back from +5 (Red) to Signal (White).<br />
+<!-- ws:start:WikiTextMediaRule:6:&lt;img src=&quot;http://www.wikispaces.com/site/embedthumbnail/custom/21132122?h=0&amp;w=0&quot; class=&quot;WikiMedia WikiMediaCustom&quot; id=&quot;wikitext@@media@@type=&amp;quot;custom&amp;quot; key=&amp;quot;21132122&amp;quot;&quot; title=&quot;Custom Media&quot;/&gt; --><br clear="all" /><!-- ws:end:WikiTextMediaRule:6 --><br />
+<!-- ws:start:WikiTextAnchorRule:39:&lt;img src=&quot;/i/anchor.gif&quot; class=&quot;WikiAnchor&quot; alt=&quot;Anchor&quot; id=&quot;wikitext@@anchor@@mult&quot; title=&quot;Anchor: mult&quot;/&gt; --><a name="mult"></a><!-- ws:end:WikiTextAnchorRule:39 --><br />
+<hr />
+<!-- ws:start:WikiTextHeadingRule:21:&lt;h3&gt; --><h3 id="toc5"><a name="x-Electronic Brick, Waterproof and other Versions-Read Temperatures from multiple DS18B20 sensors on 1 Arduino Pin:"></a><!-- ws:end:WikiTextHeadingRule:21 -->Read Temperatures from multiple DS18B20 sensors on 1 Arduino Pin:<!-- ws:start:WikiTextLocalImageRule:107:&lt;img src=&quot;/file/view/MultiDs18B20.png/609548265/MultiDs18B20.png&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;right&quot; /&gt; --><img src="/file/view/MultiDs18B20.png/609548265/MultiDs18B20.png" alt="MultiDs18B20.png" title="MultiDs18B20.png" align="right" /><!-- ws:end:WikiTextLocalImageRule:107 --></h3>
+ <br />
+You will need to know the internal address of each sensor. Farther below is a Utility Sketch that can read the address from sensors one at a time. You need to cut and paste the addresses, first to a text file and later into the example multi-sensor example sketch below.<br />
+<br />
+<!-- ws:start:WikiTextHeadingRule:23:&lt;h3&gt; --><h3 id="toc6"><a name="x-Electronic Brick, Waterproof and other Versions-Multiple DS18B20 Example:"></a><!-- ws:end:WikiTextHeadingRule:23 -->Multiple DS18B20 Example:</h3>
+ NOTE: For an example that displays multiple DS18B20 temperatures on a 4-line LCD Display <a class="wiki_link" href="http://arduino-info.wikispaces.com/MultipleTemperatureSensorsToLCD">SEE THIS EXAMPLE:</a><br />
+<br />
+<!-- ws:start:WikiTextMediaRule:7:&lt;img src=&quot;http://www.wikispaces.com/site/embedthumbnail/custom/21950162?h=0&amp;w=0&quot; class=&quot;WikiMedia WikiMediaCustom&quot; id=&quot;wikitext@@media@@type=&amp;quot;custom&amp;quot; key=&amp;quot;21950162&amp;quot;&quot; title=&quot;Custom Media&quot;/&gt; --><pre>
+<span style="color: #7E7E7E;">/* YourDuino Multiple DS18B20 Temperature Sensors on 1 wire</span>
+<span style="color: #7E7E7E;">  Connections:</span>
+<span style="color: #7E7E7E;">  DS18B20 Pinout (Left to Right, pins down, flat side toward you)</span>
+<span style="color: #7E7E7E;">  - Left   = Ground</span>
+<span style="color: #7E7E7E;">  - Center = Signal (Pin 2):  (with 3.3K to 4.7K resistor to +5 or 3.3 )</span>
+<span style="color: #7E7E7E;">  - Right  = +5 or +3.3 V</span>
+
+<span style="color: #7E7E7E;">   Questions: terry@yourduino.com </span>
+<span style="color: #7E7E7E;">   V1.01  01/17/2013 ...based on examples from Rik Kretzinger</span>
+<span style="color: #7E7E7E;">   </span>
+<span style="color: #7E7E7E;">/*-----( Import needed libraries )-----*/</span>
+<span style="color: #7E7E7E;">// Get 1-wire Library here: http://www.pjrc.com/teensy/td_libs_OneWire.html</span>
+#include &lt;<span style="color: #CC6600;">OneWire</span>.h&gt;
+
+<span style="color: #7E7E7E;">//Get DallasTemperature Library here:  http://milesburton.com/Main_Page?title=Dallas_Temperature_Control_Library</span>
+#include &lt;<span style="color: #CC6600;">DallasTemperature</span>.h&gt;
+
+<span style="color: #7E7E7E;">/*-----( Declare Constants and Pin Numbers )-----*/</span>
+#define ONE_WIRE_BUS_PIN 2
+
+<span style="color: #7E7E7E;">/*-----( Declare objects )-----*/</span>
+<span style="color: #7E7E7E;">// Setup a oneWire instance to communicate with any OneWire devices</span>
+<span style="color: #CC6600;">OneWire</span> oneWire(ONE_WIRE_BUS_PIN);
+
+<span style="color: #7E7E7E;">// Pass our oneWire reference to Dallas Temperature.</span>
+<span style="color: #CC6600;">DallasTemperature</span> sensors(&amp;oneWire);
+
+<span style="color: #7E7E7E;">/*-----( Declare Variables )-----*/</span>
+<span style="color: #7E7E7E;">// Assign the addresses of your 1-Wire temp sensors.</span>
+<span style="color: #7E7E7E;">// See the tutorial on how to obtain these addresses:</span>
+<span style="color: #7E7E7E;">// http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html</span>
+
+<span style="color: #CC6600;">DeviceAddress</span> Probe01 = { 0x28, 0x8A, 0xB1, 0x40, 0x04, 0x00, 0x00, 0xC7 }; 
+<span style="color: #CC6600;">DeviceAddress</span> Probe02 = { 0x28, 0xCC, 0x92, 0x40, 0x04, 0x00, 0x00, 0xB6 };
+<span style="color: #CC6600;">DeviceAddress</span> Probe03 = { 0x28, 0x4D, 0x8D, 0x40, 0x04, 0x00, 0x00, 0x78 };
+<span style="color: #CC6600;">DeviceAddress</span> Probe04 = { 0x28, 0x9A, 0x80, 0x40, 0x04, 0x00, 0x00, 0xD5 };
+<span style="color: #CC6600;">DeviceAddress</span> Probe05 = { 0x28, 0xE1, 0xC7, 0x40, 0x04, 0x00, 0x00, 0x0D };
+
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>()   <span style="color: #7E7E7E;">/****** SETUP: RUNS ONCE ******/</span>
+{
+  <span style="color: #7E7E7E;">// start serial port to show results</span>
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">begin</span>(9600);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Initializing Temperature Control Library Version "</span>);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(DALLASTEMPLIBVERSION);
+  
+  <span style="color: #7E7E7E;">// Initialize the Temperature measurement library</span>
+  sensors.<span style="color: #CC6600;">begin</span>();
+  
+  <span style="color: #7E7E7E;">// set the resolution to 10 bit (Can be 9 to 12 bits .. lower is faster)</span>
+  sensors.<span style="color: #CC6600;">setResolution</span>(Probe01, 10);
+  sensors.<span style="color: #CC6600;">setResolution</span>(Probe02, 10);
+  sensors.<span style="color: #CC6600;">setResolution</span>(Probe03, 10);
+  sensors.<span style="color: #CC6600;">setResolution</span>(Probe04, 10);
+  sensors.<span style="color: #CC6600;">setResolution</span>(Probe05, 10);
+
+}<span style="color: #7E7E7E;">//--(end setup )---</span>
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>()   <span style="color: #7E7E7E;">/****** LOOP: RUNS CONSTANTLY ******/</span>
+{
+  <span style="color: #CC6600;">delay</span>(1000);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Number of Devices found on bus = "</span>);  
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(sensors.<span style="color: #CC6600;">getDeviceCount</span>());   
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Getting temperatures... "</span>);  
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();   
+  
+  <span style="color: #7E7E7E;">// Command all devices on bus to read temperature  </span>
+  sensors.<span style="color: #CC6600;">requestTemperatures</span>();  
+  
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Probe 01 temperature is:   "</span>);
+  printTemperature(Probe01);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Probe 02 temperature is:   "</span>);
+  printTemperature(Probe02);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+ 
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Probe 03 temperature is:   "</span>);
+  printTemperature(Probe03);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+   
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Probe 04 temperature is:   "</span>);
+  printTemperature(Probe04);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Probe 05 temperature is:   "</span>);
+  printTemperature(Probe05);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+   
+  
+}<span style="color: #7E7E7E;">//--(end main loop )---</span>
+
+<span style="color: #7E7E7E;">/*-----( Declare User-written Functions )-----*/</span>
+<span style="color: #CC6600;">void</span> printTemperature(<span style="color: #CC6600;">DeviceAddress</span> deviceAddress)
+{
+
+<span style="color: #CC6600;">float</span> tempC = sensors.<span style="color: #CC6600;">getTempC</span>(deviceAddress);
+
+   <span style="color: #CC6600;">if</span> (tempC == -127.00) 
+   {
+   <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Error getting temperature  "</span>);
+   } 
+   <span style="color: #CC6600;">else</span>
+   {
+   <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"C: "</span>);
+   <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(tempC);
+   <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" F: "</span>);
+   <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #CC6600;">DallasTemperature</span>::<span style="color: #CC6600;">toFahrenheit</span>(tempC));
+   }
+}<span style="color: #7E7E7E;">// End printTemperature</span>
+<span style="color: #7E7E7E;">//*********( THE END )***********</span>
+
+
+</pre><!-- ws:end:WikiTextMediaRule:7 --><br />
+<br />
+<!-- ws:start:WikiTextLocalImageRule:108:&lt;img src=&quot;/file/view/DS18B20M-2-512.jpg/399487406/408x318/DS18B20M-2-512.jpg&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;height: 318px; width: 408px;&quot; align=&quot;right&quot; /&gt; --><img src="/file/view/DS18B20M-2-512.jpg/399487406/408x318/DS18B20M-2-512.jpg" alt="DS18B20M-2-512.jpg" title="DS18B20M-2-512.jpg" style="height: 318px; width: 408px;" align="right" /><!-- ws:end:WikiTextLocalImageRule:108 --><br />
+<!-- ws:start:WikiTextHeadingRule:25:&lt;h3&gt; --><h3 id="toc7"><a name="x-Electronic Brick, Waterproof and other Versions-Read individual DS18B20 Internal Addresses:"></a><!-- ws:end:WikiTextHeadingRule:25 --><!-- ws:start:WikiTextAnchorRule:40:&lt;img src=&quot;/i/anchor.gif&quot; class=&quot;WikiAnchor&quot; alt=&quot;Anchor&quot; id=&quot;wikitext@@anchor@@Read individual&quot; title=&quot;Anchor: Read individual&quot;/&gt; --><a name="Read individual"></a><!-- ws:end:WikiTextAnchorRule:40 -->Read individual DS18B20 Internal Addresses:</h3>
+ <br />
+<span style="line-height: 1.5;"> Here's a way to connect multiple DS18B20's to get their addresses and test them: A 3-wire cable connects Arduino +5V, Ground and Pin 2 to a small breadboard. The breadboard can &quot;Store&quot; DS18B20's you are working on, and 1 or more can be connected for test.</span><br />
+<span style="line-height: 1.5;"><!-- ws:start:WikiTextLocalImageRule:109:&lt;img src=&quot;/file/view/DS18B20M-3-256.jpg/399488836/DS18B20M-3-256.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;left&quot; /&gt; --><img src="/file/view/DS18B20M-3-256.jpg/399488836/DS18B20M-3-256.jpg" alt="DS18B20M-3-256.jpg" title="DS18B20M-3-256.jpg" align="left" /><!-- ws:end:WikiTextLocalImageRule:109 -->Here's a closeup of the connections: Left=Ground, Center=Data, Right=+5V, 3300 to 4700 ohm resistor from +5V to Data.</span><br />
+<br />
+<br />
+Find your sensors and put them in the top &quot;Storage&quot; row of the breadboard. Then put them one at a time in the active 3 columns on the lower right. You will use the Software Sketch below to get the individual addresses.<br />
+Next, cut and paste the sketch below into an Arduino IDE blank window. Save it. Upload it. Then open the Serial Monitor window. You should see this:<br />
+<br />
+<hr />
+<br />
+Found '1-Wire' device with address:<br />
+0x28, 0x8A, 0xB1, 0x40, 0x04, 0x00, 0x00, 0xC7<br />
+Done<br />
+<br />
+<hr />
+<br />
+That address is unique to that DS18B20.. not another the same anywhere! Open a text file and cut/paste the address to save it. I'd label it Sensor1 and put that sensor back in the first &quot;storage&quot; position. Do the same for the rest of your sensors. The sensors are hard to physically mark. &quot;Sharpie&quot; Paint Markers can work. Or an electric engraver works OK. Tape?<br />
+Now cut/paste the &quot;Multiple DS18B20 Example&quot; Sketch above. Save. Edit it to put the addresses of your sensors in the lines that look like this:<br />
+<hr />
+DeviceAddress Probe01 = { 0x28, 0x8A, 0xB1, 0x40, 0x04, 0x00, 0x00, 0xC7 };<br />
+<hr />
+Save, Upload. Plug your first DS18B20 in. <span style="line-height: 1.5;">Then open the Serial Monitor window. You should see this:</span><br />
+<hr />
+Getting temperatures...<br />
+Probe 01 temperature is: C: 26.75 F: 80.15<br />
+Probe 02 temperature is: Error getting temperature<br />
+Probe 03 temperature is: Error getting temperature<br />
+Probe 04 temperature is: Error getting temperature<br />
+Probe 05 temperature is: Error getting temperature<br />
+<hr />
+<br />
+<!-- ws:start:WikiTextLocalImageRule:110:&lt;img src=&quot;http://arduino-info.wikispaces.com/file/view/DS18B20M-4-512.jpg/399493550/DS18B20M-4-512.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;right&quot; /&gt; --><img src="http://arduino-info.wikispaces.com/file/view/DS18B20M-4-512.jpg/399493550/DS18B20M-4-512.jpg" alt="DS18B20M-4-512.jpg" title="DS18B20M-4-512.jpg" align="right" /><!-- ws:end:WikiTextLocalImageRule:110 --><br />
+Now try plugging in 2 or 3 sensors at once, like this:<br />
+<br />
+Now more sensors should show temperature readings. Wait about 5 minutes for them to stabilize and they should all be within 0.5 Degrees C.<br />
+<br />
+<br />
+<br />
+<!-- ws:start:WikiTextMediaRule:8:&lt;img src=&quot;http://www.wikispaces.com/site/embedthumbnail/custom/21952482?h=0&amp;w=0&quot; class=&quot;WikiMedia WikiMediaCustom&quot; id=&quot;wikitext@@media@@type=&amp;quot;custom&amp;quot; key=&amp;quot;21952482&amp;quot;&quot; title=&quot;Custom Media&quot;/&gt; --><br clear="all" /><!-- ws:end:WikiTextMediaRule:8 --><br />
+<br />
+<!-- ws:start:WikiTextHeadingRule:27:&lt;h2&gt; --><h2 id="toc8"><a name="x-Test Sketch to read DS18B20 addresses:"></a><!-- ws:end:WikiTextHeadingRule:27 -->Test Sketch to read DS18B20 addresses:</h2>
+ (Cut and paste from Serial Monitor)<br />
+<!-- ws:start:WikiTextAnchorRule:41:&lt;img src=&quot;/i/anchor.gif&quot; class=&quot;WikiAnchor&quot; alt=&quot;Anchor&quot; id=&quot;wikitext@@anchor@@Test Sketch to read DS18B20 addresses&quot; title=&quot;Anchor: Test Sketch to read DS18B20 addresses&quot;/&gt; --><a name="Test Sketch to read DS18B20 addresses"></a><!-- ws:end:WikiTextAnchorRule:41 --><br />
+<!-- ws:start:WikiTextMediaRule:9:&lt;img src=&quot;http://www.wikispaces.com/site/embedthumbnail/custom/21959470?h=0&amp;w=0&quot; class=&quot;WikiMedia WikiMediaCustom&quot; id=&quot;wikitext@@media@@type=&amp;quot;custom&amp;quot; key=&amp;quot;21959470&amp;quot;&quot; title=&quot;Custom Media&quot;/&gt; --><pre>
+<span style="color: #7E7E7E;">/* YourDuino Example: Find Address of a DS18B20 Temperature Sensor</span>
+<span style="color: #7E7E7E;"> Cut and paste the address to a text file for later use.</span>
+<span style="color: #7E7E7E;"> V1.1 01/17/2013</span>
+<span style="color: #7E7E7E;"> Questions: terry@yourduino.com </span>
+<span style="color: #7E7E7E;"> </span>
+<span style="color: #7E7E7E;"> Connections:</span>
+<span style="color: #7E7E7E;"> DS18B20 Pinout (Left to Right, pins down, flat side toward you)</span>
+<span style="color: #7E7E7E;"> - Left   = Ground</span>
+<span style="color: #7E7E7E;"> - Center = Signal (Pin 2):  (with 3.3K to 4.7K resistor to +5 or 3.3 )</span>
+<span style="color: #7E7E7E;"> - Right  = +5 or +3.3 V   </span>
+<span style="color: #7E7E7E;"> This sketch looks for 1-wire devices and  prints their addresses (serial number)</span>
+<span style="color: #7E7E7E;"> to the Serial Monitor in a format that is useful in Arduino sketches.</span>
+<span style="color: #7E7E7E;"> Based on example at: </span>
+<span style="color: #7E7E7E;"> http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html</span>
+<span style="color: #7E7E7E;"> */</span>
+
+<span style="color: #7E7E7E;">/*-----( Import needed libraries )-----*/</span>
+#include &lt;<span style="color: #CC6600;">OneWire</span>.h&gt;
+
+<span style="color: #7E7E7E;">/*-----( Declare Constants and Pin Numbers )-----*/</span>
+#define SENSOR_PIN 2  <span style="color: #7E7E7E;">// Any pin 2 to 12 (not 13) and A0 to A5</span>
+
+<span style="color: #7E7E7E;">/*-----( Declare objects )-----*/</span>
+<span style="color: #CC6600;">OneWire</span>  ourBus(SENSOR_PIN);  <span style="color: #7E7E7E;">// Create a 1-wire object</span>
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>()  <span style="color: #7E7E7E;">/****** SETUP: RUNS ONCE ******/</span>
+{
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">begin</span>(9600);
+ 
+  discoverOneWireDevices();  <span style="color: #7E7E7E;">// Everything happens here!</span>
+}<span style="color: #7E7E7E;">//--(end setup )---</span>
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>()   <span style="color: #7E7E7E;">/****** LOOP: RUNS CONSTANTLY ******/</span>
+{
+  <span style="color: #7E7E7E;">// Nothing happening here</span>
+}
+
+<span style="color: #7E7E7E;">/*-----( Declare User-written Functions )-----*/</span>
+<span style="color: #CC6600;">void</span> discoverOneWireDevices(<span style="color: #CC6600;">void</span>) {
+  <span style="color: #CC6600;">byte</span> i;
+  <span style="color: #CC6600;">byte</span> present = 0;
+  <span style="color: #CC6600;">byte</span> data[12];
+  <span style="color: #CC6600;">byte</span> addr[8];
+
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Looking for 1-Wire devices...\n\r"</span>);<span style="color: #7E7E7E;">// "\n\r" is NewLine </span>
+  <span style="color: #CC6600;">while</span>(ourBus.<span style="color: #CC6600;">search</span>(addr)) {
+    <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"\n\r\n\rFound \'1-Wire\' device with address:\n\r"</span>);
+    <span style="color: #CC6600;">for</span>( i = 0; i &lt; 8; i++) {
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"0x"</span>);
+      <span style="color: #CC6600;">if</span> (addr[i] &lt; 16) {
+        <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">'0'</span>);
+      }
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(addr[i], <span style="color: #006699;">HEX</span>);
+      <span style="color: #CC6600;">if</span> (i &lt; 7) {
+        <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">", "</span>);
+      }
+    }
+    <span style="color: #CC6600;">if</span> ( <span style="color: #CC6600;">OneWire</span>::<span style="color: #CC6600;">crc8</span>( addr, 7) != addr[7]) {
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"CRC is not valid!\n\r"</span>);
+      <span style="color: #CC6600;">return</span>;
+    }
+  }
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Done"</span>);
+  ourBus.<span style="color: #CC6600;">reset_search</span>();
+  <span style="color: #CC6600;">return</span>;
+}
+
+<span style="color: #7E7E7E;">//*********( THE END )***********</span>
+
+</pre><!-- ws:end:WikiTextMediaRule:9 --><br />
+<!-- ws:start:WikiTextAnchorRule:42:&lt;img src=&quot;/i/anchor.gif&quot; class=&quot;WikiAnchor&quot; alt=&quot;Anchor&quot; id=&quot;wikitext@@anchor@@multibus&quot; title=&quot;Anchor: multibus&quot;/&gt; --><a name="multibus"></a><!-- ws:end:WikiTextAnchorRule:42 --><br />
+<!-- ws:start:WikiTextHeadingRule:29:&lt;h1&gt; --><h1 id="toc9"><a name="MULTIPLE 1_WIRE BUSES:"></a><!-- ws:end:WikiTextHeadingRule:29 -->MULTIPLE 1_WIRE BUSES:</h1>
+ It is possible to have multiple 1-wire buses as well as multiple DS18B20's on each bus. Here is a test Sketch that creates two buses and searches each bus for 1-wire devices:<br />
+<!-- ws:start:WikiTextMediaRule:10:&lt;img src=&quot;http://www.wikispaces.com/site/embedthumbnail/custom/21960722?h=0&amp;w=0&quot; class=&quot;WikiMedia WikiMediaCustom&quot; id=&quot;wikitext@@media@@type=&amp;quot;custom&amp;quot; key=&amp;quot;21960722&amp;quot;&quot; title=&quot;Custom Media&quot;/&gt; --><pre>
+<span style="color: #7E7E7E;">/* YourDuino Example: Find Address of a DS18B20 Temperature Sensor</span>
+<span style="color: #7E7E7E;"> Search two electrically separate busses.</span>
+<span style="color: #7E7E7E;"> Cut and paste the address to a text file for later use.</span>
+<span style="color: #7E7E7E;"> V1.0 01/18/2013</span>
+<span style="color: #7E7E7E;"> Questions: terry@yourduino.com </span>
+<span style="color: #7E7E7E;"> </span>
+<span style="color: #7E7E7E;"> Connections:</span>
+<span style="color: #7E7E7E;"> DS18B20 Pinout (Left to Right, pins down, flat side toward you)</span>
+<span style="color: #7E7E7E;"> - Left   = Ground</span>
+<span style="color: #7E7E7E;"> - Center = Signal (Pin 2):  (with 3.3K to 4.7K resistor to +5 or 3.3 )</span>
+<span style="color: #7E7E7E;"> - Right  = +5 or +3.3 V   </span>
+<span style="color: #7E7E7E;"> This sketch looks for 1-wire devices and  prints their addresses (serial number)</span>
+<span style="color: #7E7E7E;"> to the Serial Monitor in a format that is useful in Arduino sketches.</span>
+<span style="color: #7E7E7E;"> Based on example at: </span>
+<span style="color: #7E7E7E;"> http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html</span>
+<span style="color: #7E7E7E;"> */</span>
+
+<span style="color: #7E7E7E;">/*-----( Import needed libraries )-----*/</span>
+#include &lt;<span style="color: #CC6600;">OneWire</span>.h&gt;
+
+<span style="color: #7E7E7E;">/*-----( Declare Constants and Pin Numbers )-----*/</span>
+#define SENSOR_1_PIN 2 <span style="color: #7E7E7E;">// For BUS 1</span>
+#define SENSOR_2_PIN 4 <span style="color: #7E7E7E;">// For BUS 2</span>
+
+<span style="color: #7E7E7E;">/*-----( Declare objects )-----*/</span>
+<span style="color: #CC6600;">OneWire</span>  Bus1(SENSOR_1_PIN);  <span style="color: #7E7E7E;">// Create a 1-wire object</span>
+<span style="color: #CC6600;">OneWire</span>  Bus2(SENSOR_2_PIN);  <span style="color: #7E7E7E;">// Create another 1-wire object</span>
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>()  <span style="color: #7E7E7E;">/****** SETUP: RUNS ONCE ******/</span>
+{
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">begin</span>(9600);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"Searching for DS18B20's on two different busses"</span>);
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"Searching for DS18B20's on BUS ONE"</span>);  
+  discoverBusOneWireDevices();  
+  
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"Searching for DS18B20's on BUS TWO"</span>);    
+  discoverBusTwoWireDevices();  
+}<span style="color: #7E7E7E;">//--(end setup )---</span>
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>()   <span style="color: #7E7E7E;">/****** LOOP: RUNS CONSTANTLY ******/</span>
+{
+  <span style="color: #7E7E7E;">// Nothing happening here</span>
+}
+
+<span style="color: #7E7E7E;">/*-----( Declare User-written Functions )-----*/</span>
+
+<span style="color: #CC6600;">void</span> discoverBusOneWireDevices(<span style="color: #CC6600;">void</span>) 
+{
+  <span style="color: #CC6600;">byte</span> i;
+  <span style="color: #CC6600;">byte</span> present = 0;
+  <span style="color: #CC6600;">byte</span> data[12];
+  <span style="color: #CC6600;">byte</span> addr[8];
+
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Looking for 1-Wire devices...\n\r"</span>);<span style="color: #7E7E7E;">// "\n\r" is NewLine </span>
+  <span style="color: #CC6600;">while</span>(Bus1.<span style="color: #CC6600;">search</span>(addr)) {
+    <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"\n\rFound \'1-Wire\' device with address:\n\r"</span>);
+    <span style="color: #CC6600;">for</span>( i = 0; i &lt; 8; i++) {
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"0x"</span>);
+      <span style="color: #CC6600;">if</span> (addr[i] &lt; 16) {
+        <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">'0'</span>);
+      }
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(addr[i], <span style="color: #006699;">HEX</span>);
+      <span style="color: #CC6600;">if</span> (i &lt; 7) {
+        <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">", "</span>);
+      }
+    }
+    <span style="color: #CC6600;">if</span> ( <span style="color: #CC6600;">OneWire</span>::<span style="color: #CC6600;">crc8</span>( addr, 7) != addr[7]) {
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"CRC is not valid!\n\r"</span>);
+      <span style="color: #CC6600;">return</span>;
+    }
+  }
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Done"</span>);
+  Bus1.<span style="color: #CC6600;">reset_search</span>();
+  <span style="color: #CC6600;">return</span>;
+}<span style="color: #7E7E7E;">// END</span>
+
+<span style="color: #7E7E7E;">//------------------------------------------------------------</span>
+<span style="color: #CC6600;">void</span> discoverBusTwoWireDevices(<span style="color: #CC6600;">void</span>) 
+{
+  <span style="color: #CC6600;">byte</span> i;
+  <span style="color: #CC6600;">byte</span> present = 0;
+  <span style="color: #CC6600;">byte</span> data[12];
+  <span style="color: #CC6600;">byte</span> addr[8];
+
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Looking for 1-Wire devices...\n\r"</span>);<span style="color: #7E7E7E;">// "\n\r" is NewLine </span>
+  <span style="color: #CC6600;">while</span>(Bus2.<span style="color: #CC6600;">search</span>(addr)) {
+    <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"\n\rFound \'1-Wire\' device with address:\n\r"</span>);
+    <span style="color: #CC6600;">for</span>( i = 0; i &lt; 8; i++) {
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"0x"</span>);
+      <span style="color: #CC6600;">if</span> (addr[i] &lt; 16) {
+        <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">'0'</span>);
+      }
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(addr[i], <span style="color: #006699;">HEX</span>);
+      <span style="color: #CC6600;">if</span> (i &lt; 7) {
+        <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">", "</span>);
+      }
+    }
+    <span style="color: #CC6600;">if</span> ( <span style="color: #CC6600;">OneWire</span>::<span style="color: #CC6600;">crc8</span>( addr, 7) != addr[7]) {
+      <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"CRC is not valid!\n\r"</span>);
+      <span style="color: #CC6600;">return</span>;
+    }
+  }
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Done"</span>);
+  Bus2.<span style="color: #CC6600;">reset_search</span>();
+  <span style="color: #CC6600;">return</span>;
+}<span style="color: #7E7E7E;">//END</span>
+
+
+<span style="color: #7E7E7E;">//*********( THE END )***********</span>
+
+
+
+</pre><!-- ws:end:WikiTextMediaRule:10 --><br />
+<br />
+<hr />
+<!-- ws:start:WikiTextHeadingRule:31:&lt;h2&gt; --><h2 id="toc10"><a name="MULTIPLE 1_WIRE BUSES:-LONG CABLES:"></a><!-- ws:end:WikiTextHeadingRule:31 -->LONG CABLES:</h2>
+ <!-- ws:start:WikiTextAnchorRule:43:&lt;img src=&quot;/i/anchor.gif&quot; class=&quot;WikiAnchor&quot; alt=&quot;Anchor&quot; id=&quot;wikitext@@anchor@@Long&quot; title=&quot;Anchor: Long&quot;/&gt; --><a name="Long"></a><!-- ws:end:WikiTextAnchorRule:43 --><br />
+See the example above about Multiple DS18B20's. Most people use readily-available CAT5 Ethernet cable. There are no definite &quot;Standards&quot; for pinout of the cable but here is one that is often used. It also provides separate 5V and 12V power for remote devices:<br />
+<!-- ws:start:WikiTextLocalImageRule:111:&lt;img src=&quot;/file/view/RJ45pinout.jpg/414377416/RJ45pinout.jpg&quot; alt=&quot;&quot; title=&quot;&quot; /&gt; --><img src="/file/view/RJ45pinout.jpg/414377416/RJ45pinout.jpg" alt="RJ45pinout.jpg" title="RJ45pinout.jpg" /><!-- ws:end:WikiTextLocalImageRule:111 --><br />
+<!-- ws:start:WikiTextHeadingRule:33:&lt;h2&gt; --><h2 id="toc11"><!-- ws:end:WikiTextHeadingRule:33 --> </h2>
+ <!-- ws:start:WikiTextHeadingRule:35:&lt;h2&gt; --><h2 id="toc12"><a name="MULTIPLE 1_WIRE BUSES:-TROUBLESHOOTING:"></a><!-- ws:end:WikiTextHeadingRule:35 -->TROUBLESHOOTING:</h2>
+ <br />
+The way that the library detects <strong>parasite power</strong> is to issue a &quot;Read Power Supply&quot; command to the one-wire bus, to which parasite powered sensors will respond by pulling the bus low and non-parasite sensors will leave the bus as it is. So if any one, or more, of multiple sensors pull the bus low, the library assumes that ALL the sensors are parasite powered. If you have all sensors connected to +5V power then none of the sensors should be pulling the bus low, so if you see &quot;Parasite Power&quot; there's a wiring or other problem with the way that the sensors are connected. <br />
+<br />
+<br />
+zz
+  </div>
+
+<div id="pageEditor" class="editorWrapper editorLayer">
+  <iframe id="target_editor" name="target_editor" src="/s/blank.html" style="width:0px;height:0px;border:0"></iframe>
+    <form action="/page/edit/Brick-Temperature-DS18B20" method="post" class="editorForm" id="editorForm"><input type="hidden" name="wikispacesFormToken" value="aaf7ee67ad1cb3d7f05da4380b92a02283394ccd"/><div class="jovise"><input type="text" class="form-control" name="wikispaces_user_id" value="user-1524984986"/></div><div class="movkp"><input type="text" class="form-control" name="goto" autocomplete = "off"/></div><div class="mimw"><input type="text" class="form-control" name="mode" autocomplete = "off"/></div><div class="mimw"><input type="text" class="form-control" name="version" autocomplete = "off"/></div><div class="movkp"><input type="text" class="form-control" name="pageComments" autocomplete = "off"/></div><div class="jowic"><input type="text" class="form-control" name="saveAndContinue" autocomplete = "off"/></div><div class="wsh"><input type="text" class="form-control" name="comment" autocomplete = "off"/></div><div class="mimw"><input type="text" class="form-control" name="commentsDisabled" autocomplete = "off"/></div><div class="jovise"><input type="text" class="form-control" name="contentPresent" autocomplete = "off"/></div><div class="movkp"><input type="text" class="form-control" name="editorCleanup" autocomplete = "off"/></div><div class="jovise"><input type="text" class="form-control" name="WikispacesEditorContent" autocomplete = "off"/></div><input type="hidden" name="wikispacesASFormToken" value="05b2816f374ff4ef3125c4c61264230d63b4cb6f"/>
+    <input type="hidden" title="goto" name="828698e187558c88c133363f455cfab5778ea691" value=""/>
+    <input type="hidden" title="mode" name="0855c1050d200ae90639fea5863afc5fa1e92d18" autocomplete="off" value="visual"/>
+    <input type="hidden" title="version" name="2d37cf57cb773b3ff06901964bceeec4e44583bc" autocomplete="off" value="616807425"/>
+    <input type="hidden" title="pageComments" name="45603092f007ca7e2eddc5ca33ca8145409758e0" autocomplete="off" value=""/>
+    <input type="hidden" title="saveAndContinue" name="ea3986f6fbad73e7fdd5a06ec55bb48cb896c27f" value="0"/>
+    <input type="hidden" title="comment" name="fc4fdce5a2f6fa8659b41fedc58e8f92ce560b3c" value=""/>
+    <input type="hidden" title="commentsDisabled" name="8251d53276ea264d7c654b86e0e531a0d0720bd0" autocomplete="off" value=""/>
+    <input type="hidden" title="contentPresent" name="b01b5f5b8ef06d56288762ae6be4177542a8b76f" autocomplete="off" value=""/>
+    <input type="hidden" title="editorCleanup" name="d3cf80727607a9b259845bb59c95b333f4b95726" autocomplete="off" value=""/>
+
+    <textarea id="wsMainEditor" title="content" class="noContentHide" name="4327f97ebf5caf48e55de11579683bbdbcb1023e" style="width: 100%; position: absolute; top: -50000px; left: -50000px;" autocomplete="off"></textarea>
+
+  <noscript>
+    <h2>Javascript Required</h2>
+    <p>You need to enable Javascript in your browser to edit pages.</p>
+  </noscript>
+
+  </form>
+  
+  
+  <div id="plainTextEditor" style="position:relative;display:none" class="editorLayer" >
+    <textarea id="textEditor" class="autogrow"></textarea>
+    <p style="clear:both;" align="right"><a href="http://helpcenter.wikispaces.com/customer/portal/articles/1959131-wikitext">help on how to format text</a></p>
+  </div>
+</div>
+
+
+
+
+  </div>
+  <div class="commentColumn WikispacesStream"><div class="WikispacesContent WikispacesBs3"><div class="commentList"></div></div></div>
+</div>
+
+  
+
+
+
+
+<script type="text/template" id="js-event-template">
+  <small>
+    <%- startDateShortFormat %>
+    <a href="<%- ws.common.pathFor('event', 'view', id) %>" class="WikispacesDialogLink">
+      <%- ws.common.truncate(title, 15) %>
+    </a>
+  </small>
+</script>
+
+<script type="text/template" id="js-reply-template">
+  <div class="tc-timeline-comment media">
+
+    <a class="pull-left userLink" href="<%- userCreated.url %>">
+      <img src="<%- userCreated.imageUrl %>" width="30" height="30" class="author-avatar" alt="" />
+    </a>
+    <div class="media-body" data-id="<%= id %>">
+      <% if (ws.context.user.canAdministerWiki) { %>
+        <i class="tc-delete-comment fa fa-trash-o contextual-command destroy-message ws-tip" title="Delete reply"></i>
+      <% } %>
+      <div class="tc-box-name-date">
+        <span class="tc-commenter"><a href="<%- userCreated.url %>"><%- userCreated.username %></a></span>
+        <% if (smartDate == '__live__') { %>
+        <abbr style="border-bottom-style: none;" class="timeago tc-comment-date" title="<%- (new Date(parseInt(dateCreated) * 1000)).toISOString() %>">
+          <%- (new Date(parseInt(dateCreated) * 1000)).toDateString() %>
+        </abbr>
+        <% } else { %>
+          <abbr style="border-bottom-style: none;" class="tc-comment-date"><%- smartDate %></abbr>
+        <% } %>
+      </div>
+      <% if (body) { %>
+      <p>
+        <%= body %>
+      </p>
+      <% } %>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="js-share-template">
+  <div class="tc-timeline-block tc-<%= ws.stream.typeToBlockType(sharedType) %>-block" <%= (ws.stream.hideTimeline ? 'style="padding-left: 0px;"' : '') %>>
+
+    <% if (!ws.stream.hideTimeline) { %>
+      <div class="tc-timeline-icon">
+        <i class="fa fa-<%= ws.stream.typeToIcon(sharedType) %>"></i>
+      </div>
+      <div class="tc-timeline-triangle-man"></div>
+    <% } %>
+
+    <div class="tc-timeline-box" data-id="<%= id %>">
+      <div class="media">
+        <a class="pull-left userLink" href="<%- userCreated.url %>">
+          <img src="<%- userCreated.imageUrl %>" width="48" height="48" class="author-avatar media-object" alt="" />
+        </a>
+
+        <div class="media-body">
+
+          <div class="tc-stream-dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <% if (ws.context.user.id) { %>
+              <li>
+                <a class="js-toggle-monitor" tabindex="-1" href="#">
+                  <i class="fa-fw fa fa-eye"></i>
+                  <span><%= monitored ? 'Start Monitoring' : 'Stop Monitoring' %></span>
+                </a>
+              </li>
+              <% } %>
+
+              <% if (ws.context.user.canAdministerWiki) { %>
+              <li>
+                <a class="js-toggle-lock" tabindex="-1" href="#">
+                  <i class="fa-fw fa fa-lock"></i>
+                  <span><%= locked ? 'Unlock Replies' : 'Lock Replies' %></span>
+                </a>
+              </li>
+              <% if (sharedType == 'discussion' || sharedType == 'comment' || sharedType == 'event') { %>
+              <li>
+                <a class="js-destroy-share" tabindex="-1" href="#">
+                  <i class="fa-fw fa fa-trash-o"></i>
+                  Delete <%= ws.stream.typeToName(sharedType) %>
+                </a>
+              </li>
+              <% } %>
+              <% } %>
+            </ul>
+          </div>
+
+          <div class="tc-timeline-box-header ws-reveal media-heading">
+              <h3 class="tc-box-title">
+              <% if (typeof adminLink !== 'undefined' && adminLink && ws.context.user.canAdministerWiki) { %>
+                <a href="<%- adminLink %>"><%- title %></a>
+              <% } else { %>
+                <%- title %>
+              <% } %>
+              <% if (typeof startDate !== 'undefined' && startDate) { %> - <%= startDateShortFormat %> <%= ws.stream.getYearFromStartDate(startDate) %><% } %>
+              </h3>
+              <div class="tc-box-name-date">
+                <% if (ws.context.instance.isTesClassroom) { %>
+                  <%- userCreated.username %>
+                <% } else { %>
+                  <a class="author-name" href="<%- userCreated.url %>"><%- userCreated.username %></a>
+                <% } %>
+                <% if (typeof recipients !== 'undefined' && recipients) { %>
+                  <i class="fa fa-angle-right"></i>
+                  <% if (typeof recipientsLink !== 'undefined') { %>
+                    <a href="<%- recipientsLink %>"><%- recipients %></a>
+                  <% } else { %>
+                    <span class="recipients"><%- recipients %></span>
+                  <% } %>
+                <% } %>
+                <% if (smartDate == '__live__') { %>
+                  <abbr style="border-bottom-style: none;" class="timeago tc-block-date" title="<%= (new Date(parseInt(dateCreated) * 1000)).toISOString() %>">
+                    <%= (new Date(parseInt(dateCreated) * 1000)).toDateString() %>
+                  </abbr>
+                <% } else { %>
+                  <abbr style="border-bottom-style: none;" class="tc-block-date"><%- smartDate %></abbr>
+                <% } %>
+              </div>
+          </div>
+
+          <div class="<%= sharedType == 'comment' && !orphaned && !ws.stream.noCollapse ? 'hidden ' : '' %>tc-block-content">
+            <div class="clearfix">
+              <% if (typeof rangeActions !== 'undefined') { %>
+                <div class="tc-range-actions">
+                  <% for(var i = 0; i < rangeActions.length; i++) { %>
+                  <%= ws.stream.rangeActionTemplate(rangeActions[i]) %>
+                  <% } %>
+                </div>
+              <% } %>
+              <% if (description) { %>
+                <p><%= description %></p>
+              <% } %>
+            </div>
+          </div>
+
+          <% if (replyPages.length > 0 && !(replyPages.length === 1 && replyPages[0].digests.length === 0)) { %>
+            <div class="tc-timeline-comments">
+            <% for (var i = 0; i < replyPages.length; i++) { %>
+              <% if (i == 0 && replyPages[i].more) { %>
+                <a href="#" class="tc-show-more" onclick="ws.stream.pageReplies(<%= id %>, <%= replyPages[i].page + 1 %>); return false">Show more replies (<%= replyPages[i].more %> hidden) </a>
+              <% } else { %>
+                <div></div>
+              <% } %>
+              <% for (var j = 0; j < replyPages[i].digests.length; j++) { %>
+                <%= ws.stream.replyTemplate(replyPages[i].digests[j]) %>
+              <% } %>
+            <% } %>
+            </div>
+          <% } %>
+
+          <% if ((ws.stream.userCanPostMessage && !locked) || ws.context.user.canAdministerWiki) { %>
+          <div class="tc-add-comment media <%= ws.stream.noCollapse ? 'add-active' : ''%>">
+            <img src="<%- ws.context.user.imageUrlPrefix %>lg.jpg" width="30" height="30" class="pull-left author-avatar" alt="" />
+            <div class="media-body">
+              <textarea name="reply" placeholder="Comment" class="form-control form-control-tc ws-reveal <%= !ws.stream.noCollapse ? 'ws-unrevealed' : ''%> reply" /></textarea>
+              <button type="button" class="btn-tc btn-info-tc btn-sm-tc add-reply">Post</button>
+            </div>
+          </div>
+          <% } %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="js-range-action-template">
+  <div>
+    <strong><%- name %></strong>
+    <% if (typeof(diffUrl) !== 'undefined') { %>
+      <a href="<%- diffUrl %>">
+    <% } %>
+    <%= new Date(dateCreated * 1000).toLocaleString() %>
+    <% if (typeof(diffUrl) !== 'undefined') { %>
+      </a>
+    <% } %>
+    <% if (typeof(rangeText) !== 'undefined') { %>
+      <div>
+        <span class="commentExtent">
+        <% if (typeof(diffUrl) !== 'undefined') { %>
+          <a href="<%- diffUrl %>">
+        <% } %>
+        <%= rangeText %>
+        <% if (typeof(diffUrl) !== 'undefined') { %>
+          </a>
+        <% } %>
+        </span>
+      </div>
+    <% } %>
+  </div>
+</script>
+
+<script type="text/template" id="js-stream-end-template">
+  <div class="tc-timeline-block tc-end-block">
+    <div class="tc-timeline-icon" style="margin-top: -10px;" />
+    <div class="tc-timeline-box" style="visibility: hidden;">
+      <p class="tc-box-title"></p>
+    </div>
+  </div>
+</script>
+
+<a name="discussion"></a>
+<div class="timeline WikispacesBs3 tc-timeline-embedded show-border">
+  <div class="timeline-line"></div>
+    <div id="js-share-list">
+    <div class="spinner hidden"><i class="fa fa-spinner fa-spin"></i></div>
+  </div>
+</div></div></div><div id="sentinel" style="clear:both"></div>        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<footer class="ws-theme-footer" role="contentinfo">
+  <div class="ws-theme-container">
+    <div class="ws-theme-footer-inner">
+      <div class="WikiFooterNav WikiElement">
+<a href="http://helpcenter.wikispaces.com/" rel="nofollow" class="js-help-trigger">Help</a> &middot;
+<a href="https://www.wikispaces.com/about">About</a> &middot;
+<a href="https://www.wikispaces.com/content/pricing" rel="nofollow">Pricing</a> &middot;
+<a href="https://www.wikispaces.com/privacy" rel="nofollow">Privacy</a> &middot;
+<a href="https://www.wikispaces.com/terms" rel="nofollow">Terms</a> &middot;
+<a href="https://www.wikispaces.com/site/help?url=https%3A%2F%2Farduino-info.wikispaces.com%2FBrick-Temperature-DS18B20%3FresponseToken%3D0d77cb61f8bb3ae141210fb85e1f8ce63" rel="nofollow"><strong>Support</strong></a></div>      <div class="WikiLicense WikiElement">Contributions to https://arduino-info.wikispaces.com/ are licensed under a <a rel="license" href="http://www.creativecommons.org/licenses/by-nc/3.0">Creative Commons Attribution Non-Commercial 3.0 License</a>. <a rel="license" href="http://www.creativecommons.org/licenses/by-nc/3.0"><img src="https://ssl.wikicdn.com/i/creativecommons/by-nc_3.0_80x15.png" width="85" height="15" alt="Creative Commons Attribution Non-Commercial 3.0 License"/></a><br />Portions not contributed by visitors are Copyright 2018 Tangient LLC<br /><a href="https://www.tes.com/us/?utm_source=wikispaces&utm_medium=link&utm_campaign=US-52-footer">TES: The largest network of teachers in the world</a></div>    </div>
+  </div>
+</footer>
+
+
+<script type="text/template" id="dialog-template">
+<div class="modal fade" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+        <h4 class="modal-title"><%= header %></h4>
+      </div>
+      <div class="modal-body">
+        <%= body %>
+      </div>
+    </div>
+  </div>
+</div>
+</script>
+
+
+<div id="js-help-template" class="hidden">
+  <div class="ws-help">
+    <div class="js-help-controls WikispacesContent WikispacesBs3">
+      <a href="https://www.wikispaces.com/site/gettingstarted/off" class="btn btn-default hidden js-getting-started-off pull-right">Turn off "Getting Started"</a>
+      <ol class="breadcrumb">
+        <li class="js-special-breadcrumb active">
+          <a href="http://helpcenter.wikispaces.com/" data-breadcrumb="0">Home</a>
+        </li>
+        <li class="js-ellipsis hidden js-special-breadcrumb">
+          ...
+        </li>
+        <li class="js-spinner hidden js-special-breadcrumb"><i class="fa fa-spinner fa-spin"></i></li>
+      </ol>
+    </div>
+    <div class="ws-help-content wiki">Loading...</div>
+  </div>
+</div>
+</div>
+<script src="https://ssl.wikicdn.com/s/gz/j4257158-common.min.js" type="text/javascript"></script>
+<script src="https://ssl.wikicdn.com/s/gz/40k60203-editorc.min.js" type="text/javascript"></script>
+<script src="https://ssl.wikicdn.com/s/gz/85k7018k-stream.min.js" type="text/javascript"></script>
+<script src="https://ssl.wikicdn.com/s/gz/91k8z207-contentbar.min.js" type="text/javascript"></script>
+<script src="https://ssl.wikicdn.com/s/gz/395j1vq7-component.stream-vo.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+ws.namespace('ws.attributes');
+ws.namespace('ws.stream');
+ws.attributes.DISCUSSION_COUNT = 7;
+ws.attributes.pageId = 63226120;
+ws.attributes.version = 616807425;
+ws.attributes.showEditor = true;
+ws.attributes.editUrl = "https:\/\/arduino-info.wikispaces.com\/page\/edit\/Brick-Temperature-DS18B20?goto=https%3A%2F%2Farduino-info.wikispaces.com%2FBrick-Temperature-DS18B20";
+ws.attributes.userCanEdit = false;
+ws.stream.userCanPostMessage = false;
+ws.stream.hideTimeline = true;
+ws.stream.shareSource = "https:\/\/arduino-info.wikispaces.com\/page\/shares\/Brick-Temperature-DS18B20";
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+jQuery(document).ready(function() {
+  ws.common.addJsonNotices({"warning":[],"error":[],"info":[],"success":[]});
+});
+
+jQuery(document).ready(function() {
+  ws.common.addNotice("<script type=\"text\/javascript\">function wsDismissBanner() { ws.common.removeNotice();  ws.cookie.set(\"wsAnnouncement\", 1, {expires: 365 * 86400, domain: \".wikispaces.com\"}); return false;}$(\".ui-pnotify-closer\").remove();<\/script><i class=\"fa fa-times fa-fw ws-close\" onclick=\"wsDismissBanner();\"><\/i>It's time for us to say farewell\u2026 Regretfully, we've made the tough decision to close Wikispaces. Find out why, and what will happen, <a href='http:\/\/blog.wikispaces.com' target='_top'>here<a\/>", "warning");
+});
+
+jQuery(document).ready(function($) {
+  
+  function tipPlacement() {
+    return this.$element.closest('.ws-menu-bar .btn-group').is('.open') ? 'top' : 'bottom';
+  }
+
+  
+
+  $('.ws-menu-bar').each(function() {
+    var $menuBar = $(this);
+    var $tagDropdown = $menuBar.find('.ws-tag-dropdown-menu');
+    $menuBar.find('.tipme').tooltip({placement: tipPlacement, container: '.ws-menu-bar'});
+
+    
+    $menuBar.find('.ws-btn-more').click(ws.common.makeLinkClickFunction(function(e) {
+      if ($(this).closest('.ws-menu-bar .btn-group').is('.open')) {
+        ws.common.hideMorePageBar();
+      } else {
+        ws.common.showMorePageBar();
+      }
+    }));
+
+    $menuBar.on('click', '.ws-tag-dropdown-toggle', ws.common.makeLinkClickFunction(function(e) {
+      if ($(this).closest('.ws-menu-bar .dropdown').is('.open')) {
+        ws.common.hideTagDropdown();
+      } else {
+        ws.common.showTagDropdown();
+      }
+    }));
+
+    $(document.body).click(function(e) {
+      var $target = $(e.target);
+      if (!$target.closest('.ws-more-menu').closest('.ws-menu-bar').is($menuBar)
+          || $target.closest('a').is('.WikispacesDialogLink')) {
+        ws.common.hideMorePageBar();
+      }
+      if ($tagDropdown.length && !$target.closest('.ws-tag-dropdown-menu').is($tagDropdown)) {
+        ws.common.hideTagDropdown();
+      }
+    });
+    
+  });
+});
+
+
+jQuery(document).ready(function($) {
+  $('.ws-more-menu').on('click', 'a', function(e) {
+    if ($(this).is('.disabled')) {
+      e.preventDefault();
+    }
+  });
+});
+
+
+jQuery(document).ready(function() {
+  ws.editor.canEdit = false;
+  var editUrl = 'https://arduino-info.wikispaces.com/page/edit/Brick-Temperature-DS18B20?goto=https%3A%2F%2Farduino-info.wikispaces.com%2FBrick-Temperature-DS18B20';
+
+  jQuery('#js-edit-from-template').change(function() {
+    window.location = ws.common.addUriParams(editUrl, [['template', jQuery(this).val()]]);
+  });
+});
+
+
+jQuery(document).ready(function() {
+  ws.editor.loadEditorLibs('https://www.wikispaces.com/site/editorlibs/en_US/11kk95v9.gz.js');
+});
+
+
+ws.editor.startEditor = function (moreCoreOptions, moreMainOptions) {
+  ws.editor.canEdit = true;
+
+  var coreOptions = {
+    'content_css': ['https://arduino-info.wikispaces.com/stylesheet/editor/583997825-217420326D.gz.css']
+  };
+
+  // The stylesheet is passed in as a string, turn it into an array
+  // Add bootstrap styles to the editor, if we are in a theme that has full screen bootstrap
+  if (jQuery('body').is('.WikispacesBs3')) {
+    coreOptions.content_css.push('https://www.wikispaces.com//s/internal-bootstrap-body.css');
+  }
+
+  var mainOptions = {
+    'wssave_cancel_url': '/Brick-Temperature-DS18B20',
+    'wsimage_upload_url': 'https://arduino-info.wikispaces.com/file/multiupload',
+    'wsimage_max_file_size_mb': '50',
+    'wsimage_page_view_group': ''
+  };
+
+  ws.editor.loadEditor(jQuery.extend(coreOptions, moreCoreOptions), jQuery.extend(mainOptions, moreMainOptions));
+};
+
+  var wikispaces_page_version = '616807425';
+
+  jQuery(document).ready(function() {
+    ws.editor.enableButtons();
+  });
+
+
+
+--></script><!-- w24 158 mem:2:16(29) wki:12:14(2) dql:2:7(5) tot:158:158(1) -->
+
+</body>
+</html>

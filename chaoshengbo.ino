@@ -1,63 +1,93 @@
-#include <Syn6288.h>
-
+#include "Syn6288.h"
 #include <Adafruit_BMP085.h>
-
 #include <OneWire.h>
-
 #include <Wire.h>
+#include<LiquidCrystal.h>
 
-const int RedledPin = 13;      // 连接红色LED的引脚
-const int GreenledPin = 12;      // 连接LED的引脚
+LiquidCrystal lcd(48,46,42,12,44,13);  //初始化LCD1602
+Syn6288 syn;  //TTS语音模块设置
 
-const int echopin=5; // echo接5端口
-const int trigpin=4; // trig接4端口  左侧超声波测距器
+
+const int RedledPin = 32;      // 连接红色LED的引脚
+const int GreenledPin = 34;      // 连接LED的引脚
+
+const int echopin=5;  // echo接5端口
+const int trigpin=22; // trig接22端口  下方超声波测距器
 
 
 const int echopin2=3;
-const int trigpin2=2;    // 右侧超声波测距器
+const int trigpin2=24;    // 右侧超声波测距器
 
 
 const int echopin3=6;
-const int trigpin3=7;   // 前方超声波测距器
+const int trigpin3=26;   // 前方超声波测距器
+
+const int echopin4=8;
+const int trigpin4=40;   // 左方超声波测距器
 
 
-const int dq = 10;// DS18B20温度传感器
+const int dq = 10;  // DS18B20温度传感器
 OneWire ds(dq);
+const int PIN_SPEAKER = 28;  //连接蜂鸣器的引脚
+boolean initflag,chesuflag,unnormalflag;
 
-const int PIN_SPEAKER = 8;  
+uint8_t text1[]={0xC4,0xE3,0xBA,0xC3,0xA3,0xAC,0xBB,0xB6,0xD3,0xAD,0xCA,0xB9,0xD3,0xC3,0xC6,0xFB,0xB3,0xB5,0xB5,0xB9,0xB3,0xB5,0xC0,0xD7,0xB4,0xEF,0xCF,0xB5,0xCD,0xB3};//你好，欢迎使用汽车倒车雷达系统
+uint8_t text2[]={0xCF,0xB5,0xCD,0xB3,0xD5,0xFD,0xD4,0xDA,0xC6,0xF4,0xB6,0xAF,0xA3,0xAC,0xC7,0xEB,0xC9,0xD4,0xBA,0xF3};//系统正在启动，请稍后
+uint8_t text3[]={0xBF,0xAA,0xCA,0xBC,0xB5,0xB9,0xB3,0xB5};   //开始倒车
+uint8_t text4[]={0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39};   //0,1,2,3,4,5,6,7,8,9
+uint8_t text5[]={0xB3,0xB5,0xCB,0xD9,0xB9,0xFD,0xBF,0xEC,0xA3,0xAC,0xD2,0xD1,0xC6,0xF4,0xB6,0xAF,0xBD,0xF4,0xBC,0xB1,0xD6,0xC6,0xB6,0xAF}; //车速过快，已启动紧急制动
+uint8_t text6[]={0xC9,0xE3,0xCA,0xCF,0xB6,0xC8};  //摄氏度
+uint8_t text7[]={0xCF,0xD6,0xD4,0xDA,0xCE,0xC2,0xB6,0xC8,0,0,0xB5,0xE3,0,0xC9,0xE3,0xCA,0xCF,0xB6,0xC8};  //现在温度
+uint8_t text8[]={0xB5,0xE3}; //点
+uint8_t text9[]={0xC0,0xE5,0xC3,0xD7}; //厘米
+uint8_t text10[]={0xBA,0xF3,0xB7,0xBD,0,0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //后方大于100厘米
+uint8_t text11[]={0xBA,0xF3,0xB7,0xBD,0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //后方小于100厘米
+uint8_t text12[]={0xD3,0xD2,0xB7,0xBD,0,0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //右方大于100厘米
+uint8_t text13[]={0xD3,0xD2,0xB7,0xBD,0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //右方小于100厘米
+uint8_t text14[]={0,0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //下方大于100厘米
+uint8_t text15[]={0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //下方小于100厘米
+uint8_t text16[]={0xC2,0xB7,0xC3,0xE6,0xB2,0xBB,0xC6,0xBD,0xA3,0xAC,0xC7,0xEB,0xD7,0xA2,0xD2,0xE2};
+uint8_t text17[]={0xC2,0xB7,0xC3,0xE6,0xD2,0xEC,0xB3,0xA3,0x2C,0xC2,0xB7,0xC3,0xE6,0xD2,0xEC,0xB3,0xA3};
+uint8_t text18[]={0xD7,0xF3,0xB7,0xBD,0,0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //左方大于100厘米
+uint8_t text19[]={0xD7,0xF3,0xB7,0xBD,0,0,0xB5,0xE3,0,0x2C,0,0xC0,0xE5,0xC3,0xD7}; //左方小于100厘米
 
-
-boolean initflag;
-
-uint8_t text3[]={0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39};   //0,1,2,3,4,5,6,7,8,9
-
-uint8_t tempsound[];
 
 void setup(void)
 {
   Serial.begin(9600);
-  pinMode(RedledPin,OUTPUT);
-  pinMode(GreenledPin,OUTPUT);
+  pinMode(RedledPin,OUTPUT);//设定红色led为输出模式
+  pinMode(GreenledPin,OUTPUT);//设定绿色led为输出模式
   pinMode(echopin,INPUT); //设定echo为输入模式
   pinMode(trigpin,OUTPUT);//设定trig为输出模式
-  pinMode(echopin2,INPUT);
-  pinMode(trigpin2,OUTPUT);
-  pinMode(echopin3,INPUT);
-  pinMode(trigpin3,OUTPUT);
-  pinMode(PIN_SPEAKER,OUTPUT);
+  pinMode(echopin2,INPUT);//设定echo2为输入模式
+  pinMode(trigpin2,OUTPUT);//设定trig2为输出模式
+  pinMode(echopin3,INPUT);//设定trig2为输入模式
+  pinMode(trigpin3,OUTPUT);//设定trig3为输出模式
+  pinMode(echopin4,INPUT);//设定trig4为输入模式
+  pinMode(trigpin4,OUTPUT);//设定trig4为输出模式
+  pinMode(PIN_SPEAKER,OUTPUT);//设定蜂鸣器为输出模式
+  lcd.begin(16,2);             //初始化LCD1602
+  //  lcd.print("Welcome to use!");             //液晶显示Welcome to use！
+  //  delay(1000);                         //延时1000ms
+  lcd.clear(); 
   initflag = true;
+  chesuflag = true;
+  unnormalflag = true;
 
   
 }
 
 
-float distanceL_last =0;
-float distanceL_curr =0;
+float distanceB_last =0;  //下方距离
+float distanceB_curr =0;
  
-float distanceR_last =0;
+float distanceR_last =0;  //右方距离
 float distanceR_curr =0;
  
-float distanceF_last =0;
+float distanceL_last =0;  //左方距离
+float distanceL_curr =0;
+
+float distanceF_last =0;  //后方距离
 float distanceF_curr =0;
 
 
@@ -65,33 +95,166 @@ void loop(void)
 {
   if(initflag){   
 
-    Serial.print("欢迎使用汽车倒车雷达系统 ");
-    Serial.print("系统正在启动，请稍后");
+    Serial.println("欢迎使用汽车倒车雷达系统 ");
+    syn.play(text1,sizeof(text1),0);
+    lcd.print("Welcome to use!");             //液晶显示Welcome to use！
+    delay(1000);                         //延时1000ms
+    lcd.clear(); 
+    Serial.println("系统正在启动，请稍后");
+    syn.play(text2,sizeof(text2),0);
+    lcd.setCursor(0,0); 
+    lcd.print("Loading......");  
+    delay(100);
+    lcd.setCursor(0,1); 
+    lcd.print("Start!");  
     delay(1000);
-
+    lcd.clear();
+    digitalWrite(RedledPin,LOW);
+    digitalWrite(GreenledPin,HIGH);
+    
     // *************************************测量温度********************************************/
     float temperature = getTemp();
     int shi = temperature / 10;
-    int ge = temperature % 10;
-    int _ge = (temperature *10) % 100;
-    delay(100);
+    text7[8] = text4[shi];
+    int ge = (int)temperature % 10;
+    text7[9] = text4[ge];
+    int baige = ((int)(temperature *10))%10;
+    text7[12] = text4[baige];
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("Temperature =");   //液晶显示“LM35 temp =”
+    lcd.setCursor(0,1);                      //设置液晶开始显示的指针位置
+    lcd.print((int)temperature); //液晶显示温度整数值
+    lcd.print(".");                                      //液晶显示小数点
+    lcd.print(baige);      //液晶显示温度小数值
+    lcd.print((char)223);                    //液晶显示“°”
+    lcd.print("C");                                    //液晶显示“C”
+    delay(1000); //延时1000ms
+    lcd.clear(); //清屏
+    syn.play(text7,sizeof(text7),0);
     Serial.print("temperature : ");
     Serial.print(temperature);
     Serial.println("C");
     delay(100);
-    // *********************************** 左方测距*************************************/
+    syn.play(text3,sizeof(text3),0);
+
+
+    
+    // *********************************** 下方测距*************************************/
     digitalWrite(trigpin,LOW);
     delayMicroseconds(2);
     digitalWrite(trigpin,HIGH);
     delayMicroseconds(10);
     digitalWrite(trigpin,LOW); //发一个10ms的高脉冲去触发TrigPin
-    float distanceL = pulseIn(echopin,HIGH);//接收高电平时间
-    distanceL = distanceL/58.0;//计算距离
-    distanceL_curr = distanceL;
-    Serial.print("distanceL_curr : ");  //输出距离
-    Serial.print(distanceL_curr);
+    float distanceB = pulseIn(echopin,HIGH);//接收高电平时间
+    distanceB = distanceB/58.0;//计算距离
+    distanceB_curr = distanceB;
+    int distanceB_curr_bai,distanceB_curr_shi,distanceB_curr_ge,distanceB_curr_baige,distanceB_curr_baishi;
+    distanceB_curr_bai = distanceB_curr / 100;
+    if(distanceB_curr_bai>0){
+      text14[0] = text4[distanceB_curr_bai];
+      distanceB_curr = distanceB;
+      distanceB_curr_shi = (int)distanceB_curr % 100 /10; 
+      text14[1] = text4[distanceB_curr_shi];
+      distanceB_curr = distanceB;
+      distanceB_curr_ge = ((int)distanceB_curr % 100) % 10; 
+      text14[2] = text4[distanceB_curr_ge];
+      distanceB_curr = distanceB;
+      distanceB_curr_baige = (int)(distanceB_curr * 10) % 10; 
+      text14[5] = text4[distanceB_curr_baige];
+      distanceB_curr = distanceB;
+      distanceB_curr_baishi = (int)(distanceB_curr * 100)% 10; 
+      text14[7] = text4[distanceB_curr_baishi];      
+      syn.play(text14,sizeof(text14),0);
+    }
+    else{
+      text15[0] = text4[distanceB_curr_bai];
+      distanceB_curr = distanceB;
+      int distanceB_curr_shi = (int)distanceB_curr % 100 /10; 
+      text15[0] = text4[distanceB_curr_shi];
+      distanceB_curr = distanceB;
+      int distanceB_curr_ge = ((int)distanceB_curr % 100) % 10; 
+      text15[1] = text4[distanceB_curr_ge];
+      distanceB_curr = distanceB;
+      int distanceB_curr_baige = (int)(distanceB_curr * 10) % 10; 
+      text15[4] = text4[distanceB_curr_baige];
+      distanceB_curr = distanceB;
+      int distanceB_curr_baishi = (int)(distanceB_curr * 100)% 10; 
+      text15[6] = text4[distanceB_curr_baishi];      
+      syn.play(text15,sizeof(text15),0);
+    }
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("distanceB  =");   
+    lcd.setCursor(0,1);                      
+    lcd.print((int)distanceB_curr); //液晶显示x下方整数值
+    lcd.print(".");                 //液晶显示小数点
+    lcd.print(distanceB_curr_baige);      //液晶显示下方小数值
+    lcd.print(distanceB_curr_baishi);   //液晶显示下方小数值
+    lcd.print(" cm");  //液晶显示单位
+    delay(1000); //延时1000ms
+    lcd.clear(); //清屏
+    Serial.print("distanceB_curr : ");  //输出距离
+    Serial.print(distanceB_curr);
     Serial.println("cm");  //输出单位
     delay(100);   //间隔100uS
+
+    //*************************************左方测距******************************************/
+    digitalWrite(trigpin4,LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigpin4,HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigpin4,LOW); //发一个10ms的高脉冲去触发TrigPin
+    float distanceL = pulseIn(echopin4,HIGH);//接收高电平时间
+    distanceL = distanceL/58.0;//计算距离
+    distanceL_curr = distanceL;
+    int distanceL_curr_bai,distanceL_curr_shi,distanceL_curr_ge,distanceL_curr_baige,distanceL_curr_baishi;
+    distanceL_curr_bai = distanceL_curr / 100;
+    if(distanceL_curr_bai>0)
+    {
+      text18[4] = text4[distanceL_curr_bai];
+      distanceL_curr = distanceL;
+      distanceL_curr_shi = (int)distanceL_curr % 100 /10; 
+      text18[5] = text4[distanceL_curr_shi];
+      distanceL_curr = distanceL;
+      distanceL_curr_ge = ((int)distanceL_curr % 100) % 10; 
+      text18[6] = text4[distanceL_curr_ge];
+      distanceL_curr = distanceL;
+      distanceL_curr_baige = ((int)(distanceL_curr * 10) % 10); 
+      text18[9] = text4[distanceL_curr_baige];
+      distanceL_curr = distanceL;
+      distanceL_curr_baishi = ((int)(distanceL_curr * 100)% 10); 
+      text18[11] = text4[distanceL_curr_baishi];      
+      syn.play(text18,sizeof(text18),0);
+    }
+    else{
+      text18[4] = text4[distanceL_curr_bai];
+      distanceL_curr = distanceL;
+      distanceL_curr_shi = (int)distanceL_curr % 100 /10; 
+      text19[4] = text4[distanceL_curr_shi];
+      distanceL_curr = distanceL;
+      distanceL_curr_ge = ((int)distanceL_curr % 100) % 10; 
+      text19[5] = text4[distanceL_curr_ge];
+      distanceL_curr = distanceL;
+      distanceL_curr_baige = ((int)(distanceL_curr * 10) % 10); 
+      text19[8] = text4[distanceL_curr_baige];
+      distanceL_curr = distanceL;
+      distanceL_curr_baishi = ((int)(distanceL_curr * 100)% 10); 
+      text19[10] = text4[distanceL_curr_baishi];      
+      syn.play(text19,sizeof(text19),0);
+
+    }
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("distanceL  =");   
+    lcd.setCursor(0,1);                      
+    lcd.print((int)distanceL_curr); //液晶显示x下方整数值
+    lcd.print(".");                 //液晶显示小数点
+    lcd.print(distanceL_curr_baige);      //液晶显示下方小数值
+    lcd.print(distanceL_curr_baishi);   //液晶显示下方小数值
+    lcd.print(" cm");   //液晶显示单位
+    delay(1000); //延时1000ms
+    lcd.clear(); //清屏
+    Serial.print("distanceL_curr : ");
+    Serial.print(distanceL_curr);
+    Serial.println("cm");
 
 
     //*************************************右方测距******************************************/
@@ -104,11 +267,57 @@ void loop(void)
     float distanceR = pulseIn(echopin2,HIGH);//接收高电平时间
     distanceR = distanceR/58.0;//计算距离
     distanceR_curr = distanceR;
+    int distanceR_curr_bai,distanceR_curr_shi,distanceR_curr_ge,distanceR_curr_baige,distanceR_curr_baishi;
+    distanceR_curr_bai = distanceR_curr / 100;
+    if(distanceR_curr_bai>0)
+    {
+      text12[4] = text4[distanceR_curr_bai];
+      distanceR_curr = distanceR;
+      distanceR_curr_shi = (int)distanceR_curr % 100 /10; 
+      text12[5] = text4[distanceR_curr_shi];
+      distanceR_curr = distanceR;
+      distanceR_curr_ge = ((int)distanceR_curr % 100) % 10; 
+      text12[6] = text4[distanceR_curr_ge];
+      distanceR_curr = distanceR;
+      distanceR_curr_baige = ((int)(distanceR_curr * 10) % 10); 
+      text12[9] = text4[distanceR_curr_baige];
+      distanceR_curr = distanceR;
+      distanceR_curr_baishi = ((int)(distanceR_curr * 100)% 10); 
+      text12[11] = text4[distanceR_curr_baishi];      
+      syn.play(text12,sizeof(text12),0);
+    }
+    else{
+      text12[4] = text4[distanceR_curr_bai];
+      distanceR_curr = distanceR;
+      distanceR_curr_shi = (int)distanceR_curr % 100 /10; 
+      text13[4] = text4[distanceR_curr_shi];
+      distanceR_curr = distanceR;
+      distanceR_curr_ge = ((int)distanceR_curr % 100) % 10; 
+      text13[5] = text4[distanceR_curr_ge];
+      distanceR_curr = distanceR;
+      distanceR_curr_baige = ((int)(distanceR_curr * 10) % 10); 
+      text13[8] = text4[distanceR_curr_baige];
+      distanceR_curr = distanceR;
+      distanceR_curr_baishi = ((int)(distanceR_curr * 100)% 10); 
+      text13[10] = text4[distanceR_curr_baishi];      
+      syn.play(text13,sizeof(text13),0);
+
+    }
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("distanceR  =");   
+    lcd.setCursor(0,1);                      
+    lcd.print((int)distanceR_curr); //液晶显示x下方整数值
+    lcd.print(".");                 //液晶显示小数点
+    lcd.print(distanceR_curr_baige);      //液晶显示下方小数值
+    lcd.print(distanceR_curr_baishi);   //液晶显示下方小数值
+    lcd.print(" cm");   //液晶显示单位
+    delay(1000); //延时1000ms
+    lcd.clear(); //清屏
     Serial.print("distanceR_curr : ");
     Serial.print(distanceR_curr);
     Serial.println("cm");
     
-    // *************************************前方测距********************************************/
+    // *************************************后方测距********************************************/
     digitalWrite(trigpin3,LOW);
     delayMicroseconds(2);
     digitalWrite(trigpin3,HIGH);
@@ -117,45 +326,239 @@ void loop(void)
     float distanceF = pulseIn(echopin3,HIGH);//接收高电平时间
     distanceF = distanceF/58.0;//计算距离
     distanceF_curr = distanceF;
+    int distanceF_curr_bai,distanceF_curr_shi,distanceF_curr_ge,distanceF_curr_baige,distanceF_curr_baishi;
+    distanceF_curr_bai = distanceF_curr / 100;
+    if(distanceF_curr_bai>0){
+      text10[4] = text4[distanceF_curr_bai];
+      distanceF_curr = distanceF;
+      distanceF_curr_shi = (int)distanceF_curr % 100 /10; 
+      text10[5] = text4[distanceF_curr_shi];
+      distanceF_curr = distanceF;
+      distanceF_curr_ge = ((int)distanceF_curr % 100) % 10; 
+      text10[6] = text4[distanceF_curr_ge];
+      distanceF_curr = distanceF;
+      distanceF_curr_baige = ((int)(distanceF_curr * 10) % 10); 
+      text10[9] = text4[distanceF_curr_baige];
+      distanceF_curr = distanceF;
+      distanceF_curr_baishi = ((int)(distanceF_curr * 100)% 10); 
+      text10[11] = text4[distanceF_curr_baishi];   
+      distanceF_curr = distanceF;   
+      syn.play(text10,sizeof(text10),0);
+    }
+    else{
+      
+      text10[4] = text4[distanceF_curr_bai];
+      distanceF_curr = distanceF;
+      distanceF_curr_shi = (int)distanceF_curr % 100 /10; 
+      text11[4] = text4[distanceF_curr_shi];
+      distanceF_curr = distanceF;
+      distanceF_curr_ge = ((int)distanceF_curr % 100) % 10; 
+      text11[5] = text4[distanceF_curr_ge];
+      distanceF_curr = distanceF;
+      distanceF_curr_baige = ((int)(distanceF_curr * 10) % 10); 
+      text11[8] = text4[distanceF_curr_baige];
+      distanceF_curr = distanceF;
+      distanceF_curr_baishi = ((int)(distanceF_curr * 100)% 10); 
+      text11[10] = text4[distanceF_curr_baishi];   
+      distanceF_curr = distanceF;   
+      syn.play(text11,sizeof(text11),0);
+    }
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("distanceF  =");   
+    lcd.setCursor(0,1);                      
+    lcd.print((int)distanceF_curr); //液晶显示x下方整数值
+    lcd.print(".");                 //液晶显示小数点
+    lcd.print(distanceF_curr_baige);      //液晶显示下方小数值
+    lcd.print(distanceF_curr_baishi);   //液晶显示下方小数值
+    lcd.print(" cm");  //液晶显示单位
+    delay(1000); //延时1000ms
+    lcd.clear(); //清屏
     Serial.print("distanceF_curr : ");
     Serial.print(distanceF_curr);
     Serial.println("cm");
     delay(100);   //循环间隔100uS
 
     initflag = false;
+  }
 
-    }
-    else {
-
+  else if (chesuflag){
+    
+    digitalWrite(RedledPin,LOW);
+    digitalWrite(GreenledPin,HIGH);
     // *************************************测量温度********************************************/
     float temperature = getTemp();
-    delay(100);
+    int shi = temperature / 10;
+    text7[8] = text4[shi];
+    int ge = (int)temperature % 10;
+    text7[9] = text4[ge];
+    int baige = ((int)(temperature *10))%10;
+    text7[12] = text4[baige];
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("Temperature =");   //液晶显示“LM35 temp =”
+    lcd.setCursor(0,1);                      //设置液晶开始显示的指针位置
+    lcd.print((int)temperature); //液晶显示温度整数值
+    lcd.print(".");                                      //液晶显示小数点
+    lcd.print(baige);      //液晶显示温度小数值
+    lcd.print((char)223);                    //液晶显示“°”
+    lcd.print("C");                                    //液晶显示“C”
+    delay(1000); 
+    lcd.clear(); //清屏
+    //    syn.play(text7,sizeof(text7),0);
     Serial.print("temperature : ");
     Serial.print(temperature);
     Serial.println("C");
     delay(100);
 
-    
-    // *********************************** 左方测距*************************************/
-    distanceL_last = distanceL_curr;
-    distanceL_curr = 0;
+      
+    // *********************************** 下方测距*************************************/
+    distanceB_last = distanceB_curr;
+    distanceB_curr = 0;
     digitalWrite(trigpin,LOW);
     delayMicroseconds(2);
     digitalWrite(trigpin,HIGH);
     delayMicroseconds(10);
     digitalWrite(trigpin,LOW); //发一个10ms的高脉冲去触发TrigPin
-    float distanceL = pulseIn(echopin,HIGH);//接收高电平时间
+    float distanceB = pulseIn(echopin,HIGH);//接收高电平时间
+    distanceB = distanceB/58.0;//计算距离
+    distanceB_curr = distanceB;
+    int distanceB_curr_bai,distanceB_curr_shi,distanceB_curr_ge,distanceB_curr_baige,distanceB_curr_baishi;
+    distanceB_curr_bai = distanceB_curr / 100;
+    if(distanceB_curr_bai>0){
+      text14[0] = text4[distanceB_curr_bai];
+      distanceB_curr = distanceB;
+      distanceB_curr_shi = (int)distanceB_curr % 100 /10; 
+      text14[1] = text4[distanceB_curr_shi];
+      distanceB_curr = distanceB;
+      distanceB_curr_ge = ((int)distanceB_curr % 100) % 10; 
+      text14[2] = text4[distanceB_curr_ge];
+      distanceB_curr = distanceB;
+      distanceB_curr_baige = (int)(distanceB_curr * 10) % 10; 
+      text14[5] = text4[distanceB_curr_baige];
+      distanceB_curr = distanceB;
+      distanceB_curr_baishi = (int)(distanceB_curr * 100)% 10; 
+      text14[7] = text4[distanceB_curr_baishi];      
+    //          syn.play(text10,sizeof(text10),0);
+    }
+    else{
+      text15[0] = text4[distanceB_curr_bai];
+      distanceB_curr = distanceB;
+      distanceB_curr_shi = (int)distanceB_curr % 100 /10; 
+      text15[0] = text4[distanceB_curr_shi];
+      distanceB_curr = distanceB;
+      distanceB_curr_ge = ((int)distanceB_curr % 100) % 10; 
+      text15[1] = text4[distanceB_curr_ge];
+      distanceB_curr = distanceB;
+      distanceB_curr_baige = (int)(distanceB_curr * 10) % 10; 
+      text15[4] = text4[distanceB_curr_baige];
+      distanceB_curr = distanceB;
+      distanceB_curr_baishi = (int)(distanceB_curr * 100)% 10; 
+      text15[6] = text4[distanceB_curr_baishi];      
+    //          syn.play(text11,sizeof(text11),0);
+      }
+
+    if (distanceB_last - distanceB_curr >=30){
+      //判断路面变化是否超过30cm，如果是则报警，并停止倒车
+      syn.play(text17,sizeof(text17),0);
+      lcd.setCursor(0,0); 
+      lcd.print("unnormal");
+      delay(1000);
+      lcd.clear(); //清屏
+      error();
+    }
+    else if(distanceB_last - distanceB_curr >=10){
+      //判断路面变化是否超过10cm，如果是则报警 
+      syn.play(text16,sizeof(text16),0);
+
+    }
+    else{
+        
+      lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+      lcd.print("distanceB  =");   
+      lcd.setCursor(0,1);                      
+      lcd.print((int)distanceB_curr); //液晶显示x下方整数值
+      lcd.print(".");                 //液晶显示小数点
+      lcd.print(distanceB_curr_baige);      //液晶显示下方小数值
+      lcd.print(distanceB_curr_baishi);   //液晶显示下方小数值
+      lcd.print(" cm");   //液晶显示单位
+      delay(1000); //延时1000ms
+      lcd.clear(); //清屏
+      Serial.print("distanceB_curr : ");  //输出距离
+      Serial.print(distanceB_curr);
+      Serial.println("cm");  //输出单位
+        
+    }
+    
+    //*************************************左方测距******************************************/
+    distanceL_last = distanceL_curr;
+    distanceL_curr = 0;
+    digitalWrite(trigpin4,LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigpin4,HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigpin4,LOW); //发一个10ms的高脉冲去触发TrigPin
+    float distanceL = pulseIn(echopin4,HIGH);//接收高电平时间
     distanceL = distanceL/58.0;//计算距离
     distanceL_curr = distanceL;
-    Serial.print("distanceL_curr : ");  //输出距离
+    if(distanceL_curr<=20){
+      //判断后方距离是否小于20cm，如果是则报警
+      Beep();
+      digitalWrite(RedledPin,HIGH);
+      digitalWrite(GreenledPin,LOW);
+      
+    }
+    int distanceL_curr_bai,distanceL_curr_shi,distanceL_curr_ge,distanceL_curr_baige,distanceL_curr_baishi;
+    distanceL_curr_bai = distanceL_curr / 100;
+    if(distanceL_curr_bai>0){
+    
+      text18[4] = text4[distanceL_curr_bai];
+      distanceL_curr = distanceL;
+      distanceL_curr_shi = (int)distanceL_curr % 100 /10; 
+      text18[5] = text4[distanceL_curr_shi];
+      distanceL_curr = distanceL;
+      distanceL_curr_ge = ((int)distanceL_curr % 100) % 10; 
+      text18[6] = text4[distanceL_curr_ge];
+      distanceL_curr = distanceL;
+      distanceL_curr_baige = ((int)(distanceL_curr * 10) % 10); 
+      text18[9] = text4[distanceL_curr_baige];
+      distanceL_curr = distanceL;
+      distanceL_curr_baishi = ((int)(distanceL_curr * 100)% 10); 
+      text18[11] = text4[distanceL_curr_baishi];      
+      syn.play(text18,sizeof(text18),0);
+    }
+    else{
+
+      text18[4] = text4[distanceL_curr_bai];
+      distanceL_curr = distanceL;
+      distanceL_curr_shi = (int)distanceL_curr % 100 /10; 
+      text19[4] = text4[distanceL_curr_shi];
+      distanceL_curr = distanceL;
+      distanceL_curr_ge = ((int)distanceL_curr % 100) % 10; 
+      text19[5] = text4[distanceL_curr_ge];
+      distanceL_curr = distanceL;
+      distanceL_curr_baige = ((int)(distanceL_curr * 10) % 10); 
+      text19[8] = text4[distanceL_curr_baige];
+      distanceL_curr = distanceL;
+      distanceL_curr_baishi = ((int)(distanceL_curr * 100)% 10); 
+      text19[10] = text4[distanceL_curr_baishi];      
+      syn.play(text19,sizeof(text19),0);
+
+    }
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("distanceL  =");   
+    lcd.setCursor(0,1);                      
+    lcd.print((int)distanceL_curr); //液晶显示x下方整数值
+    lcd.print(".");                 //液晶显示小数点
+    lcd.print(distanceL_curr_baige);      //液晶显示下方小数值
+    lcd.print(distanceL_curr_baishi);   //液晶显示下方小数值
+    lcd.print(" cm");   //液晶显示单位
+    delay(1000); //延时1000ms
+    lcd.clear(); //清屏
+    Serial.print("distanceL_curr : ");
     Serial.print(distanceL_curr);
-    Serial.println("cm");  //输出单位
-    if (distanceL_last - distanceL_curr > 20){
-      
-      Serial.print("车速过快，已启动紧急制动！");
-      
-      }
-//    delay(100);   //间隔100uS
+    Serial.println("cm");
+    Serial.print("distanceL_curr : ");
+    Serial.print(distanceL_curr);
+    Serial.println("cm");
 
 
     //*************************************右方测距******************************************/
@@ -169,15 +572,69 @@ void loop(void)
     float distanceR = pulseIn(echopin2,HIGH);//接收高电平时间
     distanceR = distanceR/58.0;//计算距离
     distanceR_curr = distanceR;
+    if(distanceR_curr<=20){
+      //判断后方距离是否小于20cm，如果是则报警
+      Beep();
+      digitalWrite(RedledPin,HIGH);
+      digitalWrite(GreenledPin,LOW);
+      
+    }
+    int distanceR_curr_bai,distanceR_curr_shi,distanceR_curr_ge,distanceR_curr_baige,distanceR_curr_baishi;
+    distanceR_curr_bai = distanceR_curr / 100;
+    if(distanceR_curr_bai>0){
+    
+      text12[4] = text4[distanceR_curr_bai];
+      distanceR_curr = distanceR;
+      distanceR_curr_shi = (int)distanceR_curr % 100 /10; 
+      text12[5] = text4[distanceR_curr_shi];
+      distanceR_curr = distanceR;
+      distanceR_curr_ge = ((int)distanceR_curr % 100) % 10; 
+      text12[6] = text4[distanceR_curr_ge];
+      distanceR_curr = distanceR;
+      distanceR_curr_baige = ((int)(distanceR_curr * 10) % 10); 
+      text12[9] = text4[distanceR_curr_baige];
+      distanceR_curr = distanceR;
+      distanceR_curr_baishi = ((int)(distanceR_curr * 100)% 10); 
+      text12[11] = text4[distanceR_curr_baishi];      
+      syn.play(text12,sizeof(text12),0);
+    }
+    else{
+
+      text12[4] = text4[distanceR_curr_bai];
+      distanceR_curr = distanceR;
+      distanceR_curr_shi = (int)distanceR_curr % 100 /10; 
+      text13[4] = text4[distanceR_curr_shi];
+      distanceR_curr = distanceR;
+      distanceR_curr_ge = ((int)distanceR_curr % 100) % 10; 
+      text13[5] = text4[distanceR_curr_ge];
+      distanceR_curr = distanceR;
+      distanceR_curr_baige = ((int)(distanceR_curr * 10) % 10); 
+      text13[8] = text4[distanceR_curr_baige];
+      distanceR_curr = distanceR;
+      distanceR_curr_baishi = ((int)(distanceR_curr * 100)% 10); 
+      text13[10] = text4[distanceR_curr_baishi];      
+      syn.play(text13,sizeof(text13),0);
+
+    }
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("distanceR  =");   
+    lcd.setCursor(0,1);                      
+    lcd.print((int)distanceR_curr); //液晶显示x下方整数值
+    lcd.print(".");                 //液晶显示小数点
+    lcd.print(distanceR_curr_baige);      //液晶显示下方小数值
+    lcd.print(distanceR_curr_baishi);   //液晶显示下方小数值
+    lcd.print(" cm");   //液晶显示单位
+    delay(1000); //延时1000ms
+    lcd.clear(); //清屏
     Serial.print("distanceR_curr : ");
     Serial.print(distanceR_curr);
     Serial.println("cm");
-    if ((distanceR_last - distanceR_curr) >= 20){
-      
-      Serial.print("车速过快，已启动紧急制动！");
-      
-      }
-    // *************************************前方测距********************************************/
+    Serial.print("distanceR_curr : ");
+    Serial.print(distanceR_curr);
+    Serial.println("cm");
+        
+
+    // *************************************后方测距********************************************/
     distanceF_last = distanceF_curr;
     distanceF_curr = 0;
     digitalWrite(trigpin3,LOW);
@@ -188,19 +645,102 @@ void loop(void)
     float distanceF = pulseIn(echopin3,HIGH);//接收高电平时间
     distanceF = distanceF/58.0;//计算距离
     distanceF_curr = distanceF;
-    Serial.print("distanceF_curr : ");
-    Serial.print(distanceF_curr);
-    Serial.println("cm");
-//    delay(100);   //循环间隔100uS
-    if ((distanceF_last - distanceF_curr) >= 20){
-      
-      Serial.print("车速过快，已启动紧急制动！");
-      
-      }
 
-    initflag = false;
-  
+    if(distanceF_curr<=20){
+      //判断后方距离是否小于20cm，如果是则报警
+      Beep();
+      digitalWrite(RedledPin,HIGH);
+      digitalWrite(GreenledPin,LOW); 
       }
+    if ((distanceF_last - distanceF_curr) >= 20){
+      //判断车速是否过快，如果是则停止倒车
+      syn.play(text5,sizeof(text5),0);
+      stop();
+      }
+    else{
+      int distanceF_curr_bai,distanceF_curr_shi,distanceF_curr_ge,distanceF_curr_baige,distanceF_curr_baishi;
+      distanceF_curr_bai = distanceF_curr / 100;
+      if(distanceF_curr_bai>0){
+        text10[4] = text4[distanceF_curr_bai];
+        distanceF_curr = distanceF;
+        distanceF_curr_shi = (int)distanceF_curr % 100 /10; 
+        text10[5] = text4[distanceF_curr_shi];
+        distanceF_curr = distanceF;
+        distanceF_curr_ge = ((int)distanceF_curr % 100) % 10; 
+        text10[6] = text4[distanceF_curr_ge];
+        distanceF_curr = distanceF;
+        distanceF_curr_baige = ((int)(distanceF_curr * 10) % 10); 
+        text10[9] = text4[distanceF_curr_baige];
+        distanceF_curr = distanceF;
+        distanceF_curr_baishi = ((int)(distanceF_curr * 100)% 10); 
+        text10[11] = text4[distanceF_curr_baishi];   
+        distanceF_curr = distanceF;   
+        syn.play(text10,sizeof(text10),0);
+      }
+      else{
+        text10[4] = text4[distanceF_curr_bai];
+        distanceF_curr = distanceF;
+        distanceF_curr_shi = (int)distanceF_curr % 100 /10; 
+        text11[4] = text4[distanceF_curr_shi];
+        distanceF_curr = distanceF;
+        distanceF_curr_ge = ((int)distanceF_curr % 100) % 10; 
+        text11[5] = text4[distanceF_curr_ge];
+        distanceF_curr = distanceF;
+        distanceF_curr_baige = ((int)(distanceF_curr * 10) % 10); 
+        text11[8] = text4[distanceF_curr_baige];
+        distanceF_curr = distanceF;
+        distanceF_curr_baishi = ((int)(distanceF_curr * 100)% 10); 
+        text11[10] = text4[distanceF_curr_baishi];   
+        distanceF_curr = distanceF;   
+        syn.play(text11,sizeof(text11),0);
+      }
+        lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+        lcd.print("distanceF  =");   
+        lcd.setCursor(0,1);                      
+        lcd.print((int)distanceF_curr); //液晶显示x下方整数值
+        lcd.print(".");                 //液晶显示小数点
+        lcd.print(distanceF_curr_baige);      //液晶显示下方小数值
+        lcd.print(distanceF_curr_baishi);   //液晶显示下方小数值
+        lcd.print(" cm");   //液晶显示单位
+        delay(1000); //延时1000ms
+        lcd.clear(); //清屏
+        Serial.print("distanceF_curr : ");
+        Serial.print(distanceF_curr);
+        Serial.println("cm");
+    }
+    initflag = false;
+
+  }
+  else{
+
+    Beep();
+    // *************************************测量温度********************************************/
+    float temperature = getTemp();
+    int shi = temperature / 10;
+    text7[8] = text4[shi];
+    int ge = (int)temperature % 10;
+    text7[9] = text4[ge];
+    int baige = ((int)(temperature *10))%10;
+    text7[12] = text4[baige];
+    lcd.setCursor(0,0);                      //设置液晶开始显示的指针位置
+    lcd.print("Temperature =");   //液晶显示“LM35 temp =”
+    lcd.setCursor(0,1);                      //设置液晶开始显示的指针位置
+    lcd.print((int)temperature); //液晶显示温度整数值
+    lcd.print(".");                                      //液晶显示小数点
+    lcd.print(baige);      //液晶显示温度小数值
+    lcd.print((char)223);                    //液晶显示“°”
+    lcd.print("C");                                    //液晶显示“C”
+    delay(1000); 
+    lcd.clear(); //清屏
+    syn.play(text7,sizeof(text7),0);
+    Serial.print("temperature : ");
+    Serial.print(temperature);
+    Serial.println("C");  
+    lcd.print("Danger !!!");                                    //液晶显示“C”
+    delay(2000); 
+    lcd.clear(); //清屏
+
+  }
 }
 float getTemp(){
   
@@ -232,87 +772,39 @@ float getTemp(){
   float TemperatureSum = tempRead / 16;
   return TemperatureSum;
   
-  }
+}
 
 void Beep(){
-    digitalWrite(PIN_SPEAKER, HIGH);  
-    delay(1000);  
-    digitalWrite(PIN_SPEAKER, LOW);  
-    delay(1000);  
-  }
+  digitalWrite(RedledPin,HIGH);  //红色LED亮
+  digitalWrite(GreenledPin,LOW);  //绿色LED灭
+  digitalWrite(PIN_SPEAKER, HIGH);   //蜂鸣器通电 
+  delay(1000);   //延时1000ms
+  digitalWrite(PIN_SPEAKER, LOW);  //蜂鸣器断电 
+}
+void stop(){
+  lcd.clear(); //清屏
+  chesuflag = false;
+  lcd.setCursor(0,0); 
+  lcd.print("So Fast !!!");   //液晶显示单位
+  delay(1000); //延时1000ms
+  lcd.clear(); //清屏
+  Beep();
+  initflag = false;
+  unnormalflag = false;
+}
+void error(){
+  lcd.clear(); //清屏
+  chesuflag = false;
+  lcd.setCursor(0,0); 
+  lcd.print("Error!!!");   //液晶显示单位
+  delay(1000); //延时1000ms
+  lcd.clear(); //清屏
+  Beep();
+  initflag = false;
+  unnormalflag = false;
+}
 
-//void measure(){
-//  
-//  // *********************************** 左方测距*************************************/
-//    digitalWrite(trigpin,LOW);
-//    delayMicroseconds(2);
-//    digitalWrite(trigpin,HIGH);
-//    delayMicroseconds(10);
-//    digitalWrite(trigpin,LOW); //发一个10ms的高脉冲去触发TrigPin
-//    float distanceL = pulseIn(echopin,HIGH);//接收高电平时间
-//    distanceL = distanceL/58.0;//计算距离
-//    Serial.print("distanceL : ");  //输出距离
-//    Serial.print(distanceL);
-//    Serial.println("cm");  //输出单位
-//    delay(100);   //间隔100uS
-//    
-//    
-//    //*************************************右方测距******************************************/
-//    
-//    digitalWrite(trigpin2,LOW);
-//    delayMicroseconds(2);
-//    digitalWrite(trigpin2,HIGH);
-//    delayMicroseconds(10);
-//    digitalWrite(trigpin2,LOW); //发一个10ms的高脉冲去触发TrigPin
-//    float distanceR = pulseIn(echopin2,HIGH);//接收高电平时间
-//    distanceR = distanceR/58.0;//计算距离
-//    Serial.print("distanceR : ");
-//    Serial.print(distanceR);
-//    Serial.println("cm");
-//
-//
-//    float distance;
-//
-//    if (distanceR>=distanceL){
-//
-//      distance = distanceL;
-//
-//      }
-//      else{
-//        
-//         distance = distanceR;
-//        
-//        }
-//     if ( distance <= 20){
-//        digitalWrite(RedledPin,HIGH);
-//        digitalWrite(GreenledPin,LOW);
-//        Beep();
-//        
-//      }
-//      else{
-//        digitalWrite(GreenledPin,HIGH);
-//        digitalWrite(RedledPin,LOW);
-//        }
-//    // *************************************前方测距********************************************/
-//    digitalWrite(trigpin3,LOW);
-//    delayMicroseconds(2);
-//    digitalWrite(trigpin3,HIGH);
-//    delayMicroseconds(10);
-//    digitalWrite(trigpin3,LOW); //发一个10ms的高脉冲去触发TrigPin 
-//    float distanceF = pulseIn(echopin3,HIGH);//接收高电平时间
-//    distanceF = distanceF/58.0;//计算距离
-//    Serial.print("distance3 : ");
-//    Serial.print(distanceF);
-//    Serial.println("cm");
-//    delay(100);   //循环间隔100uS
-//   // *************************************测量温度********************************************/
-//    float temperature = getTemp();
-//    delay(100);
-//    Serial.print("temperature : ");
-//    Serial.print(temperature);
-//    Serial.println("C");
-//    delay(100);
-//}
+
 
 
 
